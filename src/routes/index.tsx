@@ -231,15 +231,6 @@ function Hero() {
           Uma jornada divertida onde crianças exploram histórias bíblicas, conquistam medalhas, colecionam heróis da fé e descobrem os maiores tesouros da Palavra de Deus.
         </p>
 
-        {/* Urgência de preço */}
-        <div className="mt-6 inline-flex flex-col items-center gap-1 bg-red-600/90 backdrop-blur border-2 border-orange-300 rounded-2xl px-6 py-3 shadow-lg animate-pulse">
-          <span className="text-white/80 font-heading text-sm uppercase tracking-wider">Promoção Relâmpago</span>
-          <div className="flex items-baseline gap-3">
-            <span className="text-white/60 font-heading text-lg line-through decoration-2">De R$ 47,00</span>
-            <span className="text-white font-display text-3xl md:text-4xl font-bold drop-shadow">por R$ 9,90</span>
-          </div>
-        </div>
-
         <div className="relative mt-8 mx-auto max-w-2xl">
           <div className="absolute -inset-6 bg-gold/30 rounded-[3rem] blur-3xl" />
           <div className="relative rounded-[2rem] overflow-hidden border-8 border-gold shadow-treasure rotate-1">
