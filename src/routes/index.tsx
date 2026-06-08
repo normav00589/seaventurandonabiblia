@@ -125,7 +125,26 @@ const testimonials = [
 ];
 
 function SalesPage() {
-  useEffect(() => { initTracker(); }, []);
+  useEffect(() => {
+    // Defer non-critical scripts until after first paint to keep main thread free.
+    const run = () => {
+      try {
+        if (!document.getElementById("fb-pixel-snippet")) {
+          const s = document.createElement("script");
+          s.id = "fb-pixel-snippet";
+          s.text = FB_PIXEL_SNIPPET;
+          document.head.appendChild(s);
+        }
+      } catch {}
+      initTracker();
+    };
+    if ("requestIdleCallback" in window) {
+      (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => void })
+        .requestIdleCallback(run, { timeout: 2000 });
+    } else {
+      setTimeout(run, 1200);
+    }
+  }, []);
   return (
     <div className="overflow-x-hidden pt-12 sm:pt-11">
       <UrgencyBar />
