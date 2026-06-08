@@ -17,6 +17,7 @@ import { useState, useEffect } from "react";
 import { FB_PIXEL_ID, FB_PIXEL_SNIPPET } from "@/lib/fb-pixel";
 import { initTracker } from "@/lib/tracker";
 import { SalesNotifications } from "@/components/SalesNotifications";
+import { UrgencyBar } from "@/components/UrgencyBar";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -129,7 +130,8 @@ const testimonials = [
 function SalesPage() {
   useEffect(() => { initTracker(); }, []);
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden pt-12 sm:pt-11">
+      <UrgencyBar />
       {/* Fallback do Facebook Pixel para usuários sem JavaScript */}
       <noscript>
         <img
@@ -191,12 +193,12 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 /* ---------------- HERO ---------------- */
 function Hero() {
   return (
-    <header className="relative bg-sky-gradient overflow-hidden pt-6 pb-20 md:pb-32">
-      {/* Clouds */}
-      <div className="absolute inset-0 pointer-events-none opacity-70">
-        <div className="absolute top-10 left-10 w-32 h-12 bg-white/70 rounded-full blur-xl animate-float" />
-        <div className="absolute top-32 right-16 w-48 h-16 bg-white/60 rounded-full blur-xl animate-float" style={{ animationDelay: "1s" }} />
-        <div className="absolute top-20 left-1/2 w-40 h-14 bg-white/50 rounded-full blur-xl animate-float" style={{ animationDelay: "2s" }} />
+    <header className="relative bg-gradient-to-b from-wood-dark via-wood to-adventure-dark overflow-hidden pt-6 pb-20 md:pb-32">
+      {/* Glow accents */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-20 -left-20 w-96 h-96 bg-gold/20 rounded-full blur-3xl" />
+        <div className="absolute top-40 -right-20 w-96 h-96 bg-adventure/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-gold/10 rounded-full blur-3xl" />
       </div>
       {/* Stars */}
       <Star className="absolute top-12 right-1/4 w-6 h-6 text-gold fill-gold animate-sparkle" />
