@@ -21,28 +21,25 @@ function format(ms: number) {
 }
 
 export function UrgencyBar() {
-  const [deadline, setDeadline] = useState<number>(() =>
-    typeof window === "undefined" ? Date.now() + DURATION_MS : getDeadline(),
-  );
-  const [now, setNow] = useState<number>(Date.now());
+  const [mounted, setMounted] = useState(false);
+  const [remaining, setRemaining] = useState<number>(DURATION_MS);
 
   useEffect(() => {
-    setDeadline(getDeadline());
-    const id = setInterval(() => {
-      setNow(Date.now());
-    }, 1000);
+    setMounted(true);
+    const deadline = getDeadline();
+    const tick = () => {
+      let r = deadline - Date.now();
+      if (r <= 0) {
+        const next = Date.now() + DURATION_MS;
+        localStorage.setItem(STORAGE_KEY, String(next));
+        r = DURATION_MS;
+      }
+      setRemaining(r);
+    };
+    tick();
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
-
-  useEffect(() => {
-    if (now >= deadline) {
-      const next = Date.now() + DURATION_MS;
-      localStorage.setItem(STORAGE_KEY, String(next));
-      setDeadline(next);
-    }
-  }, [now, deadline]);
-
-  const remaining = deadline - now;
 
   return (
     <div className="fixed top-0 inset-x-0 z-[60] bg-gradient-to-r from-red-800 via-red-600 to-red-800 text-white border-b-2 border-orange-400 shadow-lg">
@@ -56,7 +53,9 @@ export function UrgencyBar() {
         </p>
         <div className="flex items-center gap-1.5 bg-red-950/60 border border-orange-400/60 rounded-full px-2.5 py-1 font-display text-sm sm:text-base tabular-nums">
           <Clock className="w-3.5 h-3.5 text-orange-300" />
-          <span className="text-orange-300">{format(remaining)}</span>
+          <span className="text-orange-300" suppressHydrationWarning>
+            {mounted ? format(remaining) : "05:00"}
+          </span>
         </div>
       </div>
     </div>
