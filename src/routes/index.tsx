@@ -193,12 +193,14 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 /* ---------------- HERO ---------------- */
 function Hero() {
   return (
-    <header className="relative bg-gradient-to-b from-wood-dark via-wood to-adventure-dark overflow-hidden pt-6 pb-20 md:pb-32">
-      {/* Glow accents */}
+    <header className="relative bg-sky-gradient overflow-hidden pt-6 pb-20 md:pb-32">
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-slate-900/30 pointer-events-none" />
+      {/* Cloud-like glow accents */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-20 -left-20 w-96 h-96 bg-gold/20 rounded-full blur-3xl" />
-        <div className="absolute top-40 -right-20 w-96 h-96 bg-adventure/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-gold/10 rounded-full blur-3xl" />
+        <div className="absolute -top-20 -left-20 w-96 h-96 bg-white/20 rounded-full blur-3xl" />
+        <div className="absolute top-40 -right-20 w-96 h-96 bg-white/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-white/10 rounded-full blur-3xl" />
       </div>
       {/* Stars */}
       <Star className="absolute top-12 right-1/4 w-6 h-6 text-gold fill-gold animate-sparkle" />
