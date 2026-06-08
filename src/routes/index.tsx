@@ -30,10 +30,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "preconnect", href: "https://connect.facebook.net", crossOrigin: "anonymous" },
-    ],
-    scripts: [
-      // Snippet oficial do Facebook Pixel — fbevents.js carrega assíncrono, não bloqueia render.
-      { children: FB_PIXEL_SNIPPET },
+      { rel: "preload", as: "image", href: heroImg, fetchpriority: "high" } as unknown as { rel: string },
     ],
   }),
   component: SalesPage,
@@ -128,7 +125,26 @@ const testimonials = [
 ];
 
 function SalesPage() {
-  useEffect(() => { initTracker(); }, []);
+  useEffect(() => {
+    // Defer non-critical scripts until after first paint to keep main thread free.
+    const run = () => {
+      try {
+        if (!document.getElementById("fb-pixel-snippet")) {
+          const s = document.createElement("script");
+          s.id = "fb-pixel-snippet";
+          s.text = FB_PIXEL_SNIPPET;
+          document.head.appendChild(s);
+        }
+      } catch {}
+      initTracker();
+    };
+    if ("requestIdleCallback" in window) {
+      (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => void })
+        .requestIdleCallback(run, { timeout: 2000 });
+    } else {
+      setTimeout(run, 1200);
+    }
+  }, []);
   return (
     <div className="overflow-x-hidden pt-12 sm:pt-11">
       <UrgencyBar />
@@ -234,7 +250,7 @@ function Hero() {
         <div className="relative mt-8 mx-auto max-w-2xl">
           <div className="absolute -inset-6 bg-gold/30 rounded-[3rem] blur-3xl" />
           <div className="relative rounded-[2rem] overflow-hidden border-8 border-gold shadow-treasure rotate-1">
-            <img src={heroImg} alt="Crianças explorando a caça ao tesouro da Bíblia" className="w-full h-auto" width={1536} height={1152} />
+            <img src={heroImg} alt="Crianças explorando a caça ao tesouro da Bíblia" className="w-full h-auto" width={1536} height={1152} fetchPriority="high" decoding="async" />
           </div>
           <div className="absolute -top-4 -left-4 md:-top-6 md:-left-6 w-20 h-20 md:w-24 md:h-24 rounded-full bg-gold border-4 border-wood-dark flex flex-col items-center justify-center font-display text-wood-dark text-center shadow-card animate-float-tilt">
             <span className="text-xl md:text-2xl leading-none">+100</span>
