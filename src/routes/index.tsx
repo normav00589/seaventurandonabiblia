@@ -245,7 +245,19 @@ function Hero() {
           </div>
         </div>
 
-        <div className="mt-10 flex justify-center">
+        {/* Preço clean entre imagem e botão */}
+        <div className="mt-6 flex flex-col items-center gap-1.5">
+          <div className="inline-flex items-center gap-2 bg-white/85 backdrop-blur border border-gold rounded-full px-5 py-1.5 shadow-sm">
+            <span className="text-adventure-dark font-heading text-xs font-bold uppercase tracking-wider">Promoção Relâmpago</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-adventure animate-pulse" />
+          </div>
+          <div className="flex items-baseline gap-3">
+            <span className="text-white/70 font-heading text-lg line-through decoration-2">De R$ 47,00</span>
+            <span className="text-gold font-display text-3xl md:text-4xl font-bold drop-shadow-md">por R$ 9,90</span>
+          </div>
+        </div>
+
+        <div className="mt-8 flex justify-center">
           <CtaButton large>QUERO COMEÇAR A AVENTURA</CtaButton>
         </div>
 
