@@ -30,10 +30,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "preconnect", href: "https://connect.facebook.net", crossOrigin: "anonymous" },
-    ],
-    scripts: [
-      // Snippet oficial do Facebook Pixel — fbevents.js carrega assíncrono, não bloqueia render.
-      { children: FB_PIXEL_SNIPPET },
+      { rel: "preload", as: "image", href: heroImg, fetchpriority: "high" } as unknown as { rel: string },
     ],
   }),
   component: SalesPage,
