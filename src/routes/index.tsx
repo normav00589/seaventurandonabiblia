@@ -16,6 +16,7 @@ import {
 import { useState, useEffect } from "react";
 import { FB_PIXEL_ID, FB_PIXEL_SNIPPET } from "@/lib/fb-pixel";
 import { initTracker } from "@/lib/tracker";
+import { SalesNotifications } from "@/components/SalesNotifications";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -139,6 +140,7 @@ function SalesPage() {
           src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
         />
       </noscript>
+      <SalesNotifications />
       <Hero />
       <Marquee />
       <Problem />
