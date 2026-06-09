@@ -7,6 +7,10 @@ import depoimentoRosangela from "@/assets/depoimento-rosangela.webp.asset.json";
 import depoimentoRoberto from "@/assets/depoimento-roberto.webp.asset.json";
 import depoimentoMarlene from "@/assets/depoimento-marlene.webp.asset.json";
 import depoimentoThiago from "@/assets/depoimento-thiago.webp.asset.json";
+import bonusColorir from "@/assets/bonus-colorir.webp.asset.json";
+import bonusCacaPalavras from "@/assets/bonus-caca-palavras.webp.asset.json";
+import bonusDetetive from "@/assets/bonus-detetive.webp.asset.json";
+import bonusOracao from "@/assets/bonus-oracao.webp.asset.json";
 import {
   Compass, ScrollText, Trophy, Star, BookOpen, Heart, Brain,
   Target, Sparkles, HandHeart, Award, Check, Shield, Download, Lock,
@@ -72,14 +76,15 @@ const benefits = [
 ];
 
 const bonuses = [
-  { n: 1, title: "Livro de Colorir Bíblico", value: "R$ 27", icon: Palette, tint: "from-adventure to-adventure-dark" },
-  { n: 2, title: "30 Caça-Palavras Bíblicos", value: "R$ 19", icon: Search, tint: "from-sky to-sky-dark" },
-  { n: 3, title: "Detetive Bíblico", value: "R$ 24", icon: Eye, tint: "from-wood to-wood-dark" },
-  { n: 4, title: "100 Figurinhas Bíblicas", value: "R$ 27", icon: Star, tint: "from-gold to-gold-dark" },
-  { n: 5, title: "Cartelas de Medalhas", value: "R$ 19", icon: Trophy, tint: "from-gold-dark to-wood" },
-  { n: 6, title: "Certificado Oficial", value: "R$ 17", icon: Award, tint: "from-adventure-dark to-wood-dark" },
-  { n: 7, title: "Atividades Extras para EBD", value: "R$ 37", icon: BookOpen, tint: "from-sky-dark to-wood-dark" },
-];
+  { n: 1, title: "Livro de Colorir Bíblico", value: "R$ 27", icon: Palette, tint: "from-adventure to-adventure-dark", image: bonusColorir.url },
+  { n: 2, title: "30 Caça-Palavras Bíblicos", value: "R$ 19", icon: Search, tint: "from-sky to-sky-dark", image: bonusCacaPalavras.url },
+  { n: 3, title: "Detetive Bíblico", value: "R$ 24", icon: Eye, tint: "from-wood to-wood-dark", image: bonusDetetive.url },
+  { n: 4, title: "Meu Diário de Oração Infantil", value: "R$ 27", icon: HandHeart, tint: "from-sky-dark to-adventure", image: bonusOracao.url },
+  { n: 5, title: "100 Figurinhas Bíblicas", value: "R$ 27", icon: Star, tint: "from-gold to-gold-dark" },
+  { n: 6, title: "Cartelas de Medalhas", value: "R$ 19", icon: Trophy, tint: "from-gold-dark to-wood" },
+  { n: 7, title: "Certificado Oficial", value: "R$ 17", icon: Award, tint: "from-adventure-dark to-wood-dark" },
+  { n: 8, title: "Atividades Extras para EBD", value: "R$ 37", icon: BookOpen, tint: "from-sky-dark to-wood-dark" },
+] as { n: number; title: string; value: string; icon: typeof Palette; tint: string; image?: string }[];
 
 const audience = [
   "Pais cristãos", "Avós", "Professores da EBD",
@@ -243,8 +248,8 @@ function Hero() {
           Transforme a Bíblia em uma <span className="block hl-gold">AVENTURA</span>
           <span className="block">que seu filho vai <span className="hl-underline">pedir para continuar</span>.</span>
         </h1>
-        <p className="mt-6 text-white/95 font-heading text-lg md:text-xl max-w-xl mx-auto drop-shadow">
-          Uma jornada divertida onde crianças exploram histórias bíblicas, conquistam medalhas, colecionam heróis da fé e descobrem os maiores tesouros da Palavra de Deus.
+        <p className="mt-6 text-white/95 font-heading text-base md:text-lg max-w-2xl mx-auto drop-shadow">
+          Um material bíblico infantil completo para tirar as crianças um pouco das telas e ensinar <strong>fé, coragem, obediência e amor a Deus</strong> por meio de histórias, pinturas, figurinhas, jogos, desafios e versículos para memorizar.
         </p>
 
         <div className="relative mt-8 mx-auto max-w-2xl">
@@ -554,9 +559,15 @@ function Bonuses() {
                 <div className="absolute -top-2 -left-2 w-8 h-8 rounded-full bg-adventure text-white font-display text-sm flex items-center justify-center border-2 border-white shadow-card z-10">
                   {b.n}
                 </div>
-                <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br ${b.tint} border-[3px] border-wood-dark flex items-center justify-center shadow-card mb-3`}>
-                  <Icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={2.5} />
-                </div>
+                {b.image ? (
+                  <div className="w-full aspect-square rounded-2xl bg-gradient-to-br from-sky/10 to-gold/10 border-[3px] border-wood-dark flex items-center justify-center shadow-card mb-3 overflow-hidden p-1">
+                    <img src={b.image} alt={b.title} loading="lazy" className="w-full h-full object-contain drop-shadow-md" />
+                  </div>
+                ) : (
+                  <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br ${b.tint} border-[3px] border-wood-dark flex items-center justify-center shadow-card mb-3`}>
+                    <Icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={2.5} />
+                  </div>
+                )}
                 <div className="font-display text-[10px] md:text-xs uppercase tracking-widest text-adventure-dark">Bônus {b.n}</div>
                 <h3 className="font-display text-sm md:text-base text-ink mt-1 leading-tight">{b.title}</h3>
                 <div className="mt-3 font-display text-base md:text-lg text-destructive line-through">{b.value}</div>
