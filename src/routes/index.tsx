@@ -76,14 +76,15 @@ const benefits = [
 ];
 
 const bonuses = [
-  { n: 1, title: "Livro de Colorir Bíblico", value: "R$ 27", icon: Palette, tint: "from-adventure to-adventure-dark" },
-  { n: 2, title: "30 Caça-Palavras Bíblicos", value: "R$ 19", icon: Search, tint: "from-sky to-sky-dark" },
-  { n: 3, title: "Detetive Bíblico", value: "R$ 24", icon: Eye, tint: "from-wood to-wood-dark" },
-  { n: 4, title: "100 Figurinhas Bíblicas", value: "R$ 27", icon: Star, tint: "from-gold to-gold-dark" },
-  { n: 5, title: "Cartelas de Medalhas", value: "R$ 19", icon: Trophy, tint: "from-gold-dark to-wood" },
-  { n: 6, title: "Certificado Oficial", value: "R$ 17", icon: Award, tint: "from-adventure-dark to-wood-dark" },
-  { n: 7, title: "Atividades Extras para EBD", value: "R$ 37", icon: BookOpen, tint: "from-sky-dark to-wood-dark" },
-];
+  { n: 1, title: "Livro de Colorir Bíblico", value: "R$ 27", icon: Palette, tint: "from-adventure to-adventure-dark", image: bonusColorir.url },
+  { n: 2, title: "30 Caça-Palavras Bíblicos", value: "R$ 19", icon: Search, tint: "from-sky to-sky-dark", image: bonusCacaPalavras.url },
+  { n: 3, title: "Detetive Bíblico", value: "R$ 24", icon: Eye, tint: "from-wood to-wood-dark", image: bonusDetetive.url },
+  { n: 4, title: "Meu Diário de Oração Infantil", value: "R$ 27", icon: HandHeart, tint: "from-sky-dark to-adventure", image: bonusOracao.url },
+  { n: 5, title: "100 Figurinhas Bíblicas", value: "R$ 27", icon: Star, tint: "from-gold to-gold-dark" },
+  { n: 6, title: "Cartelas de Medalhas", value: "R$ 19", icon: Trophy, tint: "from-gold-dark to-wood" },
+  { n: 7, title: "Certificado Oficial", value: "R$ 17", icon: Award, tint: "from-adventure-dark to-wood-dark" },
+  { n: 8, title: "Atividades Extras para EBD", value: "R$ 37", icon: BookOpen, tint: "from-sky-dark to-wood-dark" },
+] as { n: number; title: string; value: string; icon: typeof Palette; tint: string; image?: string }[];
 
 const audience = [
   "Pais cristãos", "Avós", "Professores da EBD",
