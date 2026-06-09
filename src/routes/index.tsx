@@ -248,8 +248,8 @@ function Hero() {
           Transforme a Bíblia em uma <span className="block hl-gold">AVENTURA</span>
           <span className="block">que seu filho vai <span className="hl-underline">pedir para continuar</span>.</span>
         </h1>
-        <p className="mt-6 text-white/95 font-heading text-lg md:text-xl max-w-xl mx-auto drop-shadow">
-          Uma jornada divertida onde crianças exploram histórias bíblicas, conquistam medalhas, colecionam heróis da fé e descobrem os maiores tesouros da Palavra de Deus.
+        <p className="mt-6 text-white/95 font-heading text-base md:text-lg max-w-2xl mx-auto drop-shadow">
+          Um material bíblico infantil completo para tirar as crianças um pouco das telas e ensinar <strong>fé, coragem, obediência e amor a Deus</strong> por meio de histórias, pinturas, figurinhas, jogos, desafios e versículos para memorizar.
         </p>
 
         <div className="relative mt-8 mx-auto max-w-2xl">
