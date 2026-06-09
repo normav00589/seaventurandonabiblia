@@ -7,6 +7,10 @@ import depoimentoRosangela from "@/assets/depoimento-rosangela.webp.asset.json";
 import depoimentoRoberto from "@/assets/depoimento-roberto.webp.asset.json";
 import depoimentoMarlene from "@/assets/depoimento-marlene.webp.asset.json";
 import depoimentoThiago from "@/assets/depoimento-thiago.webp.asset.json";
+import bonusColorir from "@/assets/bonus-colorir.webp.asset.json";
+import bonusCacaPalavras from "@/assets/bonus-caca-palavras.webp.asset.json";
+import bonusDetetive from "@/assets/bonus-detetive.webp.asset.json";
+import bonusOracao from "@/assets/bonus-oracao.webp.asset.json";
 import {
   Compass, ScrollText, Trophy, Star, BookOpen, Heart, Brain,
   Target, Sparkles, HandHeart, Award, Check, Shield, Download, Lock,
