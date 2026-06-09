@@ -559,9 +559,15 @@ function Bonuses() {
                 <div className="absolute -top-2 -left-2 w-8 h-8 rounded-full bg-adventure text-white font-display text-sm flex items-center justify-center border-2 border-white shadow-card z-10">
                   {b.n}
                 </div>
-                <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br ${b.tint} border-[3px] border-wood-dark flex items-center justify-center shadow-card mb-3`}>
-                  <Icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={2.5} />
-                </div>
+                {b.image ? (
+                  <div className="w-full aspect-square rounded-2xl bg-gradient-to-br from-sky/10 to-gold/10 border-[3px] border-wood-dark flex items-center justify-center shadow-card mb-3 overflow-hidden p-1">
+                    <img src={b.image} alt={b.title} loading="lazy" className="w-full h-full object-contain drop-shadow-md" />
+                  </div>
+                ) : (
+                  <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br ${b.tint} border-[3px] border-wood-dark flex items-center justify-center shadow-card mb-3`}>
+                    <Icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={2.5} />
+                  </div>
+                )}
                 <div className="font-display text-[10px] md:text-xs uppercase tracking-widest text-adventure-dark">Bônus {b.n}</div>
                 <h3 className="font-display text-sm md:text-base text-ink mt-1 leading-tight">{b.title}</h3>
                 <div className="mt-3 font-display text-base md:text-lg text-destructive line-through">{b.value}</div>
