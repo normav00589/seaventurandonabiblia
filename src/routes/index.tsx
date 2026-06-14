@@ -281,7 +281,7 @@ function Hero() {
         <div className="relative mt-8 mx-auto max-w-2xl">
           <div className="absolute -inset-6 bg-gold/30 rounded-[3rem] blur-3xl" />
           <div className="relative rounded-[2rem] overflow-hidden border-8 border-gold shadow-treasure rotate-1">
-            <img src={heroImg} alt="Crianças explorando a caça ao tesouro da Bíblia" className="w-full h-auto" width={1536} height={1152} fetchPriority="high" decoding="async" />
+            <img src={heroImg} alt="Kit completo A Grande Caça ao Tesouro da Bíblia — 5 livros, figurinhas, certificado e medalhas" className="w-full h-auto" width={900} height={900} fetchPriority="high" decoding="async" />
           </div>
           <div className="absolute -top-4 -left-4 md:-top-6 md:-left-6 w-20 h-20 md:w-24 md:h-24 rounded-full bg-gold border-4 border-wood-dark flex flex-col items-center justify-center font-display text-wood-dark text-center shadow-card animate-float-tilt">
             <span className="text-xl md:text-2xl leading-none">+100</span>
