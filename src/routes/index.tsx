@@ -274,7 +274,7 @@ function Hero() {
           </div>
           <div className="flex items-baseline gap-3">
             <span className="text-white/70 font-heading text-lg line-through decoration-2">De R$ 47,00</span>
-            <span className="text-gold font-display text-3xl md:text-4xl font-bold drop-shadow-md">por R$ 9,90</span>
+            <span className="text-gold font-display text-3xl md:text-4xl font-bold drop-shadow-md">por R$ 5,90</span>
           </div>
         </div>
 
@@ -681,7 +681,7 @@ function Offer() {
             </div>
             <div className="mt-4 text-center">
               <div className="font-heading text-ink/60 line-through text-base">De R$ 27,00</div>
-              <div className="mt-1 font-display text-5xl md:text-6xl text-wood-dark">R$ 9,90</div>
+              <div className="mt-1 font-display text-5xl md:text-6xl text-wood-dark">R$ 5,90</div>
               <div className="mt-1 font-heading text-sm text-ink/70">pagamento único</div>
             </div>
 
@@ -712,7 +712,7 @@ function Offer() {
             </ul>
 
             <div className="mt-6">
-              <a href="https://pay.cakto.com.br/s2jguhd_917342" target="_blank" rel="noopener noreferrer" className="block w-full text-center px-6 py-4 rounded-full bg-wood text-parchment font-heading font-bold uppercase tracking-wide text-sm md:text-base shadow-card hover:scale-[1.02] transition-transform">
+              <a href="https://pay.wiapy.com/vdY3JZwdII6" target="_blank" rel="noopener noreferrer" className="block w-full text-center px-6 py-4 rounded-full bg-wood text-parchment font-heading font-bold uppercase tracking-wide text-sm md:text-base shadow-card hover:scale-[1.02] transition-transform">
                 Quero o Plano Básico
               </a>
             </div>
@@ -728,8 +728,8 @@ function Offer() {
             </div>
             <div className="mt-4 text-center">
               <div className="font-heading text-ink/60 line-through text-base">De R$ 97,00</div>
-              <div className="mt-1 font-display text-5xl md:text-6xl text-adventure-dark">R$ 17,90</div>
-              <div className="mt-1 font-heading text-sm text-ink/70">ou 12x de <strong className="text-ink">R$ 1,79</strong></div>
+              <div className="mt-1 font-display text-5xl md:text-6xl text-adventure-dark">R$ 13,90</div>
+              <div className="mt-1 font-heading text-sm text-ink/70">ou 12x de <strong className="text-ink">R$ 1,16</strong></div>
             </div>
 
             <div className="my-5 h-1 dashed-trail" />
@@ -753,7 +753,7 @@ function Offer() {
             </ul>
 
             <div className="mt-6">
-              <CtaButton large href="https://pay.cakto.com.br/5e9jtks">QUERO O PLANO PREMIUM</CtaButton>
+              <CtaButton large href="https://pay.wiapy.com/rwCIjKRuF2">QUERO O PLANO PREMIUM</CtaButton>
             </div>
           </div>
         </div>
