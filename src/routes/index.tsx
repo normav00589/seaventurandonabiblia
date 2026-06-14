@@ -142,6 +142,17 @@ function SalesPage() {
         }
       } catch {}
       initTracker();
+      // Advanced tracking: ViewContent (página de oferta) com dedupe via CAPI
+      setTimeout(() => {
+        try {
+          trackFbEvent("ViewContent", {
+            content_name: "Kit Caça ao Tesouro da Bíblia",
+            content_type: "product",
+            currency: "BRL",
+            value: 13.9,
+          });
+        } catch {}
+      }, 500);
     };
     if ("requestIdleCallback" in window) {
       (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => void })
