@@ -39,8 +39,8 @@ export const sendFbEvent = createServerFn({ method: "POST" })
     const req = getRequest();
     const ua = req.headers.get("user-agent") ?? undefined;
     const ip = getRequestIP({ xForwardedFor: true }) ?? undefined;
-    const fbp = req.headers.get("x-fbp") ?? undefined;
-    const fbc = req.headers.get("x-fbc") ?? undefined;
+    const fbp = data.fbp ?? req.headers.get("x-fbp") ?? undefined;
+    const fbc = data.fbc ?? req.headers.get("x-fbc") ?? undefined;
 
     const userData: Record<string, unknown> = {};
     if (data.email) userData.em = [await sha256(data.email)];
@@ -49,6 +49,13 @@ export const sendFbEvent = createServerFn({ method: "POST" })
     if (ua) userData.client_user_agent = ua;
     if (fbp) userData.fbp = fbp;
     if (fbc) userData.fbc = fbc;
+
+    const customData: Record<string, unknown> = {};
+    if (data.value != null) {
+      customData.value = data.value;
+      customData.currency = data.currency ?? "BRL";
+    }
+    if (data.contentName) customData.content_name = data.contentName;
 
     const body = {
       data: [
@@ -59,10 +66,7 @@ export const sendFbEvent = createServerFn({ method: "POST" })
           action_source: "website",
           event_source_url: data.eventSourceUrl,
           user_data: userData,
-          custom_data:
-            data.value != null
-              ? { value: data.value, currency: data.currency ?? "BRL" }
-              : undefined,
+          custom_data: Object.keys(customData).length > 0 ? customData : undefined,
         },
       ],
     };
