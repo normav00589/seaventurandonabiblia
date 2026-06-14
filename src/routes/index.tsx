@@ -18,7 +18,7 @@ import {
   Palette, Search, Eye, Gift,
 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { FB_PIXEL_ID, FB_PIXEL_SNIPPET } from "@/lib/fb-pixel";
+import { FB_PIXEL_ID, FB_PIXEL_SNIPPET, trackFbEvent, fbTrack } from "@/lib/fb-pixel";
 import { initTracker } from "@/lib/tracker";
 import { SalesNotifications } from "@/components/SalesNotifications";
 import { UrgencyBar } from "@/components/UrgencyBar";
