@@ -728,8 +728,8 @@ function Offer() {
             </div>
             <div className="mt-4 text-center">
               <div className="font-heading text-ink/60 line-through text-base">De R$ 97,00</div>
-              <div className="mt-1 font-display text-5xl md:text-6xl text-adventure-dark">R$ 17,90</div>
-              <div className="mt-1 font-heading text-sm text-ink/70">ou 12x de <strong className="text-ink">R$ 1,79</strong></div>
+              <div className="mt-1 font-display text-5xl md:text-6xl text-adventure-dark">R$ 13,90</div>
+              <div className="mt-1 font-heading text-sm text-ink/70">ou 12x de <strong className="text-ink">R$ 1,16</strong></div>
             </div>
 
             <div className="my-5 h-1 dashed-trail" />
@@ -753,7 +753,7 @@ function Offer() {
             </ul>
 
             <div className="mt-6">
-              <CtaButton large href="https://pay.cakto.com.br/5e9jtks">QUERO O PLANO PREMIUM</CtaButton>
+              <CtaButton large href="https://pay.wiapy.com/rwCIjKRuF2">QUERO O PLANO PREMIUM</CtaButton>
             </div>
           </div>
         </div>
