@@ -704,7 +704,23 @@ function Offer() {
             </ul>
 
             <div className="mt-6">
-              <a href="https://pay.wiapy.com/vdY3JZwdII6" target="_blank" rel="noopener noreferrer" className="block w-full text-center px-6 py-4 rounded-full bg-wood text-parchment font-heading font-bold uppercase tracking-wide text-sm md:text-base shadow-card hover:scale-[1.02] transition-transform">
+              <a
+                href="https://pay.wiapy.com/vdY3JZwdII6"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cta="primary"
+                onClick={() => {
+                  try {
+                    trackFbEvent("InitiateCheckout", {
+                      content_name: "Plano Básico",
+                      content_type: "product",
+                      currency: "BRL",
+                      value: 5.9,
+                    });
+                  } catch {}
+                }}
+                className="block w-full text-center px-6 py-4 rounded-full bg-wood text-parchment font-heading font-bold uppercase tracking-wide text-sm md:text-base shadow-card hover:scale-[1.02] transition-transform"
+              >
                 Quero o Plano Básico
               </a>
             </div>
