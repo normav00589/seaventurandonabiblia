@@ -323,40 +323,6 @@ function Marquee() {
   );
 }
 
-/* ---------------- PROBLEM ---------------- */
-function Problem() {
-  return (
-    <section className="relative py-20 md:py-28 bg-parchment-gradient">
-      <div className="max-w-4xl mx-auto px-4 text-center">
-        <SectionLabel>O Problema</SectionLabel>
-        <h2 className="mt-6 text-stroke-wood font-display text-3xl md:text-5xl">
-          Seu filho <span className="hl-underline">conhece</span> os personagens da Bíblia... ou apenas <span className="hl-underline">ouviu falar</span> deles?
-        </h2>
-        <p className="mt-8 text-lg md:text-xl text-ink/85 font-heading max-w-2xl mx-auto">
-          Muitas crianças passam <strong>horas diante das telas</strong> todos os dias. Enquanto isso, histórias incríveis como <em>Noé, Abraão, José, Moisés e Daniel</em> acabam sendo esquecidas ou vistas apenas superficialmente.
-        </p>
-
-        <div className="mt-10 grid sm:grid-cols-2 gap-4 text-left">
-          {[
-            "Falta de interesse pela Bíblia",
-            "Pouca retenção do conteúdo",
-            "Dificuldade em criar hábitos espirituais",
-            "Menos conexão com os ensinamentos cristãos",
-          ].map((p) => (
-            <div key={p} className="flex items-start gap-3 bg-white/70 backdrop-blur border-2 border-wood/30 rounded-2xl p-4 shadow-card">
-              <span className="w-8 h-8 rounded-full bg-destructive text-white flex items-center justify-center font-display flex-shrink-0">!</span>
-              <p className="font-heading font-semibold text-ink">{p}</p>
-            </div>
-          ))}
-        </div>
-
-        <p className="mt-12 font-display text-2xl md:text-3xl text-stroke-wood">
-          E se existisse uma forma <span className="hl-marker">divertida</span> de mudar isso?
-        </p>
-      </div>
-    </section>
-  );
-}
 
 /* ---------------- SOLUTION ---------------- */
 
