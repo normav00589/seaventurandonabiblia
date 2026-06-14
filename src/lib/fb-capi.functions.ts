@@ -6,7 +6,7 @@ import { z } from "zod";
 // (Lead, Purchase) com dedupe via event_id — melhora o matching mesmo com
 // bloqueadores de anúncios.
 
-const PIXEL_ID = "1027016336523047";
+const PIXEL_ID = "4377717859166211";
 const API_VERSION = "v20.0";
 
 const InputSchema = z.object({
@@ -30,7 +30,7 @@ async function sha256(input: string): Promise<string> {
 export const sendFbEvent = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => InputSchema.parse(data))
   .handler(async ({ data }) => {
-    const token = process.env.FB_CONVERSIONS_API_TOKEN;
+    const token = "EAAX1GoOmhIgBRlzPklJlObHtwioJsOAwqLUrbzgXfp2HMrNS8g6JAwA90ztGMiKWPezKlSmgL7gVOwjUml5xUHBB56a77EJcc1XXsHlDMyJNwItM5PO3Aec9nNU0SgjqUd86er7yYXyj5fYVkZCSa2ZBQpZBUtr9IfrnZCUY9kmxhvsf7VCnzTcmWyEGhQZDZD";
     if (!token) return { ok: false, error: "missing_token" as const };
 
     const req = getRequest();

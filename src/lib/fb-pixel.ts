@@ -2,7 +2,7 @@
 // O script principal (fbevents.js) é carregado de forma assíncrona pelo
 // snippet injetado no <head>, então não bloqueia renderização.
 
-export const FB_PIXEL_ID = "1027016336523047";
+export const FB_PIXEL_ID = "4377717859166211";
 
 type FbqFn = ((...args: unknown[]) => void) & { callMethod?: unknown; queue?: unknown[] };
 declare global {
