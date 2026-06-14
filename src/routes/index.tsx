@@ -681,7 +681,7 @@ function Offer() {
             </div>
             <div className="mt-4 text-center">
               <div className="font-heading text-ink/60 line-through text-base">De R$ 27,00</div>
-              <div className="mt-1 font-display text-5xl md:text-6xl text-wood-dark">R$ 9,90</div>
+              <div className="mt-1 font-display text-5xl md:text-6xl text-wood-dark">R$ 5,90</div>
               <div className="mt-1 font-heading text-sm text-ink/70">pagamento único</div>
             </div>
 
@@ -712,7 +712,7 @@ function Offer() {
             </ul>
 
             <div className="mt-6">
-              <a href="https://pay.cakto.com.br/s2jguhd_917342" target="_blank" rel="noopener noreferrer" className="block w-full text-center px-6 py-4 rounded-full bg-wood text-parchment font-heading font-bold uppercase tracking-wide text-sm md:text-base shadow-card hover:scale-[1.02] transition-transform">
+              <a href="https://pay.wiapy.com/vdY3JZwdII6" target="_blank" rel="noopener noreferrer" className="block w-full text-center px-6 py-4 rounded-full bg-wood text-parchment font-heading font-bold uppercase tracking-wide text-sm md:text-base shadow-card hover:scale-[1.02] transition-transform">
                 Quero o Plano Básico
               </a>
             </div>
