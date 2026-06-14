@@ -274,7 +274,7 @@ function Hero() {
           </div>
           <div className="flex items-baseline gap-3">
             <span className="text-white/70 font-heading text-lg line-through decoration-2">De R$ 47,00</span>
-            <span className="text-gold font-display text-3xl md:text-4xl font-bold drop-shadow-md">por R$ 9,90</span>
+            <span className="text-gold font-display text-3xl md:text-4xl font-bold drop-shadow-md">por R$ 5,90</span>
           </div>
         </div>
 
