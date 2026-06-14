@@ -166,7 +166,7 @@ function SalesPage() {
       <SalesNotifications />
       <Hero />
       <Marquee />
-      <Problem />
+      
       
       <HowItWorks />
       <WhatsIncluded />
