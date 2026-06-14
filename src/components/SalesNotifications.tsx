@@ -91,7 +91,7 @@ export function SalesNotifications() {
             {notification.name} — {notification.state}
           </p>
           <p className="text-xs text-muted-foreground leading-tight mt-0.5">
-            comprou o Plano Pro · <span className="font-semibold text-adventure-dark">R$ 17,90</span>
+            comprou o Plano Pro · <span className="font-semibold text-adventure-dark">R$ 13,90</span>
           </p>
           <p className="text-[10px] text-muted-foreground/70 mt-0.5">{notification.when} · compra verificada</p>
         </div>
