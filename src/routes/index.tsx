@@ -194,12 +194,27 @@ function SalesPage() {
   );
 }
 
-function CtaButton({ children, large = false, href = "#offer", external = false }: { children: React.ReactNode; large?: boolean; href?: string; external?: boolean }) {
+function CtaButton({ children, large = false, href = "#offer", external = false, plan }: { children: React.ReactNode; large?: boolean; href?: string; external?: boolean; plan?: { name: string; value: number } }) {
   const isExternal = external || /^https?:\/\//.test(href);
+  const onClick = () => {
+    try {
+      if (plan) {
+        trackFbEvent("InitiateCheckout", {
+          content_name: plan.name,
+          content_type: "product",
+          currency: "BRL",
+          value: plan.value,
+        });
+      } else {
+        fbTrack("Lead");
+      }
+    } catch {}
+  };
   return (
     <a
       href={href}
       data-cta="primary"
+      onClick={onClick}
       {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={`inline-flex items-center justify-center gap-3 bg-gold-gradient text-ink font-display tracking-wide
         rounded-full shadow-treasure border-4 border-wood-dark
