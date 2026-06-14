@@ -174,8 +174,8 @@ function SalesPage() {
       <Benefits />
       <Bonuses />
       
-      <Testimonials />
       <Offer />
+      <Testimonials />
       <Guarantee />
       <FAQ />
       <Footer />
