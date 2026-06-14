@@ -6,7 +6,7 @@ import { z } from "zod";
 // (Lead, Purchase) com dedupe via event_id — melhora o matching mesmo com
 // bloqueadores de anúncios.
 
-const PIXEL_ID = "1027016336523047";
+const PIXEL_ID = "4377717859166211";
 const API_VERSION = "v20.0";
 
 const InputSchema = z.object({
