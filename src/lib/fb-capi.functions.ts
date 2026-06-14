@@ -17,6 +17,9 @@ const InputSchema = z.object({
   phone: z.string().min(3).max(32).optional(),
   value: z.number().nonnegative().optional(),
   currency: z.string().length(3).optional(),
+  contentName: z.string().max(120).optional(),
+  fbp: z.string().max(200).optional(),
+  fbc: z.string().max(400).optional(),
 });
 
 async function sha256(input: string): Promise<string> {
