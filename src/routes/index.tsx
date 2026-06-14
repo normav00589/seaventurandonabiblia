@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import heroAsset from "@/assets/hero-kit.webp.asset.json";
+import heroAsset from "@/assets/hero-mockup.webp.asset.json";
 const heroImg = heroAsset.url;
 import productAsset from "@/assets/product-mockup.webp.asset.json";
 const productImg = productAsset.url;
