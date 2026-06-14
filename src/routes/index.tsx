@@ -18,7 +18,7 @@ import {
   Palette, Search, Eye, Gift,
 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { FB_PIXEL_ID, FB_PIXEL_SNIPPET } from "@/lib/fb-pixel";
+import { FB_PIXEL_ID, FB_PIXEL_SNIPPET, trackFbEvent, fbTrack } from "@/lib/fb-pixel";
 import { initTracker } from "@/lib/tracker";
 import { SalesNotifications } from "@/components/SalesNotifications";
 import { UrgencyBar } from "@/components/UrgencyBar";
@@ -142,6 +142,17 @@ function SalesPage() {
         }
       } catch {}
       initTracker();
+      // Advanced tracking: ViewContent (página de oferta) com dedupe via CAPI
+      setTimeout(() => {
+        try {
+          trackFbEvent("ViewContent", {
+            content_name: "Kit Caça ao Tesouro da Bíblia",
+            content_type: "product",
+            currency: "BRL",
+            value: 13.9,
+          });
+        } catch {}
+      }, 500);
     };
     if ("requestIdleCallback" in window) {
       (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => void })
@@ -183,12 +194,27 @@ function SalesPage() {
   );
 }
 
-function CtaButton({ children, large = false, href = "#offer", external = false }: { children: React.ReactNode; large?: boolean; href?: string; external?: boolean }) {
+function CtaButton({ children, large = false, href = "#offer", external = false, plan }: { children: React.ReactNode; large?: boolean; href?: string; external?: boolean; plan?: { name: string; value: number } }) {
   const isExternal = external || /^https?:\/\//.test(href);
+  const onClick = () => {
+    try {
+      if (plan) {
+        trackFbEvent("InitiateCheckout", {
+          content_name: plan.name,
+          content_type: "product",
+          currency: "BRL",
+          value: plan.value,
+        });
+      } else {
+        fbTrack("Lead");
+      }
+    } catch {}
+  };
   return (
     <a
       href={href}
       data-cta="primary"
+      onClick={onClick}
       {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={`inline-flex items-center justify-center gap-3 bg-gold-gradient text-ink font-display tracking-wide
         rounded-full shadow-treasure border-4 border-wood-dark
@@ -678,7 +704,23 @@ function Offer() {
             </ul>
 
             <div className="mt-6">
-              <a href="https://pay.wiapy.com/vdY3JZwdII6" target="_blank" rel="noopener noreferrer" className="block w-full text-center px-6 py-4 rounded-full bg-wood text-parchment font-heading font-bold uppercase tracking-wide text-sm md:text-base shadow-card hover:scale-[1.02] transition-transform">
+              <a
+                href="https://pay.wiapy.com/vdY3JZwdII6"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cta="primary"
+                onClick={() => {
+                  try {
+                    trackFbEvent("InitiateCheckout", {
+                      content_name: "Plano Básico",
+                      content_type: "product",
+                      currency: "BRL",
+                      value: 5.9,
+                    });
+                  } catch {}
+                }}
+                className="block w-full text-center px-6 py-4 rounded-full bg-wood text-parchment font-heading font-bold uppercase tracking-wide text-sm md:text-base shadow-card hover:scale-[1.02] transition-transform"
+              >
                 Quero o Plano Básico
               </a>
             </div>
@@ -719,7 +761,7 @@ function Offer() {
             </ul>
 
             <div className="mt-6">
-              <CtaButton large href="https://pay.wiapy.com/rwCIjKRuF2">QUERO O PLANO PREMIUM</CtaButton>
+              <CtaButton large href="https://pay.wiapy.com/rwCIjKRuF2" plan={{ name: "Plano Premium", value: 13.9 }}>QUERO O PLANO PREMIUM</CtaButton>
             </div>
           </div>
         </div>
