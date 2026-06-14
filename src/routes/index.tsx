@@ -761,7 +761,7 @@ function Offer() {
             </ul>
 
             <div className="mt-6">
-              <CtaButton large href="https://pay.wiapy.com/rwCIjKRuF2">QUERO O PLANO PREMIUM</CtaButton>
+              <CtaButton large href="https://pay.wiapy.com/rwCIjKRuF2" plan={{ name: "Plano Premium", value: 13.9 }}>QUERO O PLANO PREMIUM</CtaButton>
             </div>
           </div>
         </div>
