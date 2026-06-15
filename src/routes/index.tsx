@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import heroAsset from "@/assets/hero-mockup.webp.asset.json";
+import hero480Asset from "@/assets/hero-mockup-480.webp.asset.json";
+import hero768Asset from "@/assets/hero-mockup-768.webp.asset.json";
 const heroImg = heroAsset.url;
+const heroImg480 = hero480Asset.url;
+const heroImg768 = hero768Asset.url;
+const heroSrcSet = `${heroImg480} 480w, ${heroImg768} 768w, ${heroImg} 900w`;
+const heroSizes = "(max-width: 640px) 92vw, (max-width: 1024px) 60vw, 640px";
 import productAsset from "@/assets/product-mockup.webp.asset.json";
 const productImg = productAsset.url;
 import depoimentoRosangela from "@/assets/depoimento-rosangela.webp.asset.json";
@@ -17,11 +23,15 @@ import {
   ChevronDown, Printer, MapPin, Crown, Flame, Anchor, Sun,
   Palette, Search, Eye, Gift,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { FB_PIXEL_ID, FB_PIXEL_SNIPPET, trackFbEvent, fbTrack } from "@/lib/fb-pixel";
 import { initTracker } from "@/lib/tracker";
-import { SalesNotifications } from "@/components/SalesNotifications";
 import { UrgencyBar } from "@/components/UrgencyBar";
+
+const SalesNotifications = lazy(() =>
+  import("@/components/SalesNotifications").then((m) => ({ default: m.SalesNotifications })),
+);
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,8 +44,16 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "preconnect", href: "https://connect.facebook.net", crossOrigin: "anonymous" },
-      { rel: "preload", as: "image", href: heroImg, fetchpriority: "high" } as unknown as { rel: string },
+      {
+        rel: "preload",
+        as: "image",
+        href: heroImg480,
+        imagesrcset: heroSrcSet,
+        imagesizes: heroSizes,
+        fetchpriority: "high",
+      } as unknown as { rel: string },
     ],
+
   }),
   component: SalesPage,
 });
@@ -174,7 +192,7 @@ function SalesPage() {
           src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
         />
       </noscript>
-      <SalesNotifications />
+      <Suspense fallback={null}><SalesNotifications /></Suspense>
       <Hero />
       <Marquee />
       
@@ -281,7 +299,7 @@ function Hero() {
         <div className="relative mt-8 mx-auto max-w-2xl">
           <div className="absolute -inset-6 bg-gold/30 rounded-[3rem] blur-3xl" />
           <div className="relative rounded-[2rem] overflow-hidden border-8 border-gold shadow-treasure rotate-1">
-            <img src={heroImg} alt="Kit completo A Grande Caça ao Tesouro da Bíblia — 5 livros, figurinhas, certificado e medalhas" className="w-full h-auto" width={900} height={900} fetchPriority="high" decoding="async" />
+            <img src={heroImg480} srcSet={heroSrcSet} sizes={heroSizes} alt="Kit completo A Grande Caça ao Tesouro da Bíblia — 5 livros, figurinhas, certificado e medalhas" className="w-full h-auto" width={900} height={900} fetchPriority="high" decoding="async" />
           </div>
           <div className="absolute -top-4 -left-4 md:-top-6 md:-left-6 w-20 h-20 md:w-24 md:h-24 rounded-full bg-gold border-4 border-wood-dark flex flex-col items-center justify-center font-display text-wood-dark text-center shadow-card animate-float-tilt">
             <span className="text-xl md:text-2xl leading-none">+100</span>
