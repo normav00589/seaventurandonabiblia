@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "A Grande Caça ao Tesouro da Bíblia — Aventura Cristã Infantil" },
-      { name: "description", content: "Transforme o aprendizado da Bíblia em uma aventura que seu filho vai pedir para continuar. Missões, personagens, medalhas e tesouros da Palavra de Deus." },
+      { name: "description", content: "Seu filho aprende a Bíblia brincando, longe do excesso de telas. Missões, personagens, medalhas e tesouros da Palavra de Deus." },
       { property: "og:title", content: "A Grande Caça ao Tesouro da Bíblia" },
       { property: "og:description", content: "Uma jornada divertida onde crianças exploram histórias bíblicas, conquistam medalhas e colecionam heróis da fé." },
       { property: "og:image", content: heroImg },
@@ -271,8 +271,8 @@ function Hero() {
           <Crown className="w-4 h-4" /> Aventura Cristã Colecionável
         </div>
         <h1 className="text-stroke-sky font-display sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-3xl">
-          Transforme a Bíblia em uma <span className="block hl-gold">AVENTURA</span>
-          <span className="block">que seu filho vai <span className="hl-underline">pedir para continuar</span>.</span>
+          Seu filho aprende a <span className="hl-gold">Bíblia brincando</span>,
+          <span className="block">longe do <span className="hl-underline">excesso de telas</span></span>
         </h1>
         <p className="mt-6 text-white/95 font-heading text-base md:text-lg max-w-2xl mx-auto drop-shadow">
           Um material bíblico infantil completo para tirar as crianças um pouco das telas e ensinar <strong>fé, coragem, obediência e amor a Deus</strong> por meio de histórias, pinturas, figurinhas, jogos, desafios e versículos para memorizar.
