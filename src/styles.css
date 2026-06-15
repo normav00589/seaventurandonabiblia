@@ -162,3 +162,12 @@
   @keyframes sparkle { 0%,100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
   .animate-sparkle { animation: sparkle 2.5s ease-in-out infinite; }
 }
+
+/* Defer rendering of below-the-fold sections to reduce initial layout/paint cost.
+   contain-intrinsic-size keeps scrollbar/anchors stable while content is skipped. */
+section[data-funnel-step="bonus"],
+section[data-funnel-step="testimonials"],
+section[data-funnel-step="offer"] {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1200px;
+}
