@@ -258,14 +258,14 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 /* ---------------- HERO ---------------- */
 function Hero() {
   return (
-    <header className="relative bg-sky-gradient overflow-hidden pt-6 pb-20 md:pb-32">
-      {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 bg-slate-900/30 pointer-events-none" />
-      {/* Cloud-like glow accents */}
+    <header className="relative bg-hero-gradient overflow-hidden pt-6 pb-20 md:pb-28">
+      {/* Subtle warm overlay for text readability */}
+      <div className="absolute inset-0 bg-wood-dark/20 pointer-events-none" />
+      {/* Warm glow accents */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-20 -left-20 w-96 h-96 bg-white/20 rounded-full blur-3xl" />
-        <div className="absolute top-40 -right-20 w-96 h-96 bg-white/15 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-white/10 rounded-full blur-3xl" />
+        <div className="absolute -top-20 -left-20 w-96 h-96 bg-gold/25 rounded-full blur-3xl" />
+        <div className="absolute top-40 -right-20 w-96 h-96 bg-adventure/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-gold/15 rounded-full blur-3xl" />
       </div>
       {/* Stars */}
       <Star className="absolute top-12 right-1/4 w-6 h-6 text-gold fill-gold animate-sparkle" />
@@ -284,57 +284,61 @@ function Hero() {
         </a>
       </nav>
 
-      <div className="relative max-w-3xl mx-auto px-4 mt-10 md:mt-16 text-center">
-        <div className="inline-flex items-center gap-2 bg-gold text-wood-dark font-heading font-bold uppercase text-xs px-4 py-2 rounded-full border-2 border-wood-dark shadow-card mb-6">
+      <div className="relative max-w-3xl mx-auto px-4 mt-8 md:mt-12 text-center">
+        <div className="inline-flex items-center gap-2 bg-gold text-wood-dark font-heading font-bold uppercase text-xs px-4 py-2 rounded-full border-2 border-wood-dark shadow-card mb-5">
           <Crown className="w-4 h-4" /> Aventura Cristã Colecionável
         </div>
-        <h1 className="text-stroke-sky font-display sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-3xl">
+        <h1 className="text-stroke-sky font-display sm:text-5xl md:text-6xl leading-[1.05] text-3xl">
           Seu filho aprende a <span className="hl-gold">Bíblia brincando</span>,
           <span className="block">longe do <span className="hl-underline">excesso de telas</span></span>
         </h1>
-        <p className="mt-6 text-white/95 font-heading text-base md:text-lg max-w-2xl mx-auto drop-shadow">
-          Um material bíblico infantil completo para tirar as crianças um pouco das telas e ensinar <strong>fé, coragem, obediência e amor a Deus</strong> por meio de histórias, pinturas, figurinhas, jogos, desafios e versículos para memorizar.
+        <p className="mt-5 text-white/95 font-heading text-base md:text-lg max-w-2xl mx-auto drop-shadow">
+          Mais de <strong>100 personagens</strong>, figurinhas, pinturas e desafios para ensinar valores cristãos de forma divertida.
         </p>
 
-        <div className="relative mt-8 mx-auto max-w-2xl">
+        <div className="relative mt-6 mx-auto max-w-xs sm:max-w-sm md:max-w-md">
           <div className="absolute -inset-6 bg-gold/30 rounded-[3rem] blur-3xl" />
           <div className="relative rounded-[2rem] overflow-hidden border-8 border-gold shadow-treasure rotate-1">
             <img src={heroImg480} srcSet={heroSrcSet} sizes={heroSizes} alt="Kit completo A Grande Caça ao Tesouro da Bíblia — 5 livros, figurinhas, certificado e medalhas" className="w-full h-auto" width={900} height={900} fetchPriority="high" decoding="async" />
           </div>
-          <div className="absolute -top-4 -left-4 md:-top-6 md:-left-6 w-20 h-20 md:w-24 md:h-24 rounded-full bg-gold border-4 border-wood-dark flex flex-col items-center justify-center font-display text-wood-dark text-center shadow-card animate-float-tilt">
-            <span className="text-xl md:text-2xl leading-none">+100</span>
-            <span className="text-[10px] uppercase">Heróis</span>
+          <div className="absolute -top-3 -left-3 md:-top-5 md:-left-5 w-16 h-16 md:w-20 md:h-20 rounded-full bg-gold border-4 border-wood-dark flex flex-col items-center justify-center font-display text-wood-dark text-center shadow-card animate-float-tilt">
+            <span className="text-lg md:text-xl leading-none">+100</span>
+            <span className="text-[9px] uppercase">Heróis</span>
           </div>
-          <div className="absolute -bottom-4 -right-3 md:-bottom-6 md:-right-4 px-3 py-2 md:px-4 md:py-3 rounded-2xl bg-adventure border-4 border-wood-dark text-white font-display shadow-card animate-float">
-            <div className="flex items-center gap-2 text-sm"><Trophy className="w-5 h-5" /> Medalhas</div>
-          </div>
-        </div>
-
-        {/* Preço clean entre imagem e botão */}
-        <div className="mt-6 flex flex-col items-center gap-1.5">
-          <div className="inline-flex items-center gap-2 bg-white/85 backdrop-blur border border-gold rounded-full px-5 py-1.5 shadow-sm">
-            <span className="text-adventure-dark font-heading text-xs font-bold uppercase tracking-wider">Promoção Relâmpago</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-adventure animate-pulse" />
-          </div>
-          <div className="flex items-baseline gap-3">
-            <span className="text-white/70 font-heading text-lg line-through decoration-2">De R$ 47,00</span>
-            <span className="text-gold font-display text-3xl md:text-4xl font-bold drop-shadow-md">por R$ 5,90</span>
+          <div className="absolute -bottom-3 -right-2 md:-bottom-5 md:-right-3 px-2.5 py-1.5 md:px-3 md:py-2 rounded-2xl bg-adventure border-4 border-wood-dark text-white font-display shadow-card animate-float">
+            <div className="flex items-center gap-1.5 text-xs"><Trophy className="w-4 h-4" /> Medalhas</div>
           </div>
         </div>
 
-        <div className="mt-8 flex justify-center">
-          <CtaButton large>QUERO COMEÇAR A AVENTURA</CtaButton>
+        {/* Oferta em destaque */}
+        <div className="mt-8 mx-auto max-w-md">
+          <div className="inline-flex items-center gap-2 bg-destructive text-white font-heading text-xs font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full border-2 border-wood-dark shadow-card mb-3">
+            <Flame className="w-3.5 h-3.5" /> Promoção de Hoje
+            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+          </div>
+          <div className="bg-white/95 backdrop-blur border-4 border-gold rounded-3xl px-6 py-4 shadow-treasure">
+            <div className="flex items-baseline justify-center gap-2 flex-wrap">
+              <span className="text-wood font-heading text-base sm:text-lg line-through decoration-2 decoration-destructive">De R$ 47,00</span>
+              <span className="text-wood-dark font-heading text-sm sm:text-base">por apenas</span>
+            </div>
+            <div className="text-adventure-dark font-display text-4xl sm:text-5xl font-extrabold leading-none mt-1">
+              R$ 5,90
+            </div>
+          </div>
         </div>
 
-        <ul className="mt-8 grid sm:grid-cols-2 gap-2 max-w-xl mx-auto text-left">
+        <div className="mt-6 flex justify-center">
+          <CtaButton large>QUERO RECEBER O KIT AGORA</CtaButton>
+        </div>
+
+        <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-2 max-w-md mx-auto text-left">
           {[
-            "Aprendizado bíblico divertido",
-            "Mais de 100 personagens",
-            "Missões e desafios interativos",
-            "Medalhas e recompensas",
+            "Material digital",
             "Pronto para imprimir",
+            "Acesso imediato",
+            "Pagamento seguro",
           ].map((b) => (
-            <li key={b} className="flex items-center gap-2 text-white font-heading font-semibold">
+            <li key={b} className="flex items-center gap-2 text-white font-heading font-semibold text-sm sm:text-base">
               <span className="w-6 h-6 rounded-full bg-adventure border-2 border-white flex items-center justify-center flex-shrink-0">
                 <Check className="w-3.5 h-3.5 text-white" strokeWidth={4} />
               </span>
