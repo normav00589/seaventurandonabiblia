@@ -117,12 +117,6 @@ const faqs = [
   { q: "Tem garantia?", a: "Sim, 21 dias incondicionais. Se não gostar, devolvemos 100% do valor." },
 ];
 
-const testimonials = [
-  { name: "Ana Paula", image: wppAnaPaula.url },
-  { name: "Tia Simone", image: wppTiaSimone.url },
-  { name: "Dona Rosângela", image: wppDonaRosangela.url },
-  { name: "Juliana", image: wppJuliana.url },
-];
 
 function SalesPage() {
   useEffect(() => {
