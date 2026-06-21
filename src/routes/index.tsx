@@ -9,10 +9,10 @@ const heroSrcSet = `${heroImg480} 480w, ${heroImg768} 768w, ${heroImg} 900w`;
 const heroSizes = "(max-width: 640px) 92vw, (max-width: 1024px) 60vw, 640px";
 import productAsset from "@/assets/product-mockup.webp.asset.json";
 const productImg = productAsset.url;
-import depoimentoRosangela from "@/assets/depoimento-rosangela.webp.asset.json";
-import depoimentoRoberto from "@/assets/depoimento-roberto.webp.asset.json";
-import depoimentoMarlene from "@/assets/depoimento-marlene.webp.asset.json";
-import depoimentoThiago from "@/assets/depoimento-thiago.webp.asset.json";
+import wppAnaPaula from "@/assets/wpp-ana-paula.webp.asset.json";
+import wppTiaSimone from "@/assets/wpp-tia-simone.webp.asset.json";
+import wppDonaRosangela from "@/assets/wpp-dona-rosangela.webp.asset.json";
+import wppJuliana from "@/assets/wpp-juliana.webp.asset.json";
 import bonusColorir from "@/assets/bonus-colorir.webp.asset.json";
 import bonusCacaPalavras from "@/assets/bonus-caca-palavras.webp.asset.json";
 import bonusDetetive from "@/assets/bonus-detetive.webp.asset.json";
@@ -121,30 +121,10 @@ const faqs = [
 ];
 
 const testimonials = [
-  {
-    name: "Rosângela, 52",
-    role: "Avó do João, 7 anos",
-    photo: depoimentoRosangela.url,
-    text: "Confesso que comprei meio desconfiada, achei que ele não ia ter paciência. No primeiro dia, meu neto sentou comigo, fez a missão da Arca e ainda pediu pra ligar pro pai contando o que aprendeu. Chorei, viu?",
-  },
-  {
-    name: "Roberto, 48",
-    role: "Pai da Lívia e do Theo",
-    photo: depoimentoRoberto.url,
-    text: "Eu trabalho fora o dia todo e queria um momento de qualidade com meus filhos à noite. A Caça ao Tesouro virou nosso ritual depois do jantar. Hoje eles me lembram: 'Pai, e a missão de hoje?'",
-  },
-  {
-    name: "Dona Marlene, 61",
-    role: "Professora de EBD há 22 anos",
-    photo: depoimentoMarlene.url,
-    text: "Já testei muito material na igreja, mas esse foi o primeiro que prendeu as crianças do começo ao fim. As figurinhas e medalhas geraram um engajamento que eu nunca tinha visto. Recomendo de olhos fechados.",
-  },
-  {
-    name: "Thiago, 34",
-    role: "Pai de primeira viagem",
-    photo: depoimentoThiago.url,
-    text: "Não tenho muito conhecimento bíblico e tinha medo de ensinar errado. O material guia tudo passinho a passinho. Meu filho de 6 anos hoje sabe quem é Davi, Noé, Moisés... e o melhor: entende o porquê de cada história.",
-  },
+  { name: "Ana Paula", image: wppAnaPaula.url },
+  { name: "Tia Simone", image: wppTiaSimone.url },
+  { name: "Dona Rosângela", image: wppDonaRosangela.url },
+  { name: "Juliana", image: wppJuliana.url },
 ];
 
 function SalesPage() {
@@ -203,8 +183,8 @@ function SalesPage() {
       <Benefits />
       <Bonuses />
       
-      <Offer />
       <Testimonials />
+      <Offer />
       <Guarantee />
       <FAQ />
       <Footer />
@@ -608,39 +588,39 @@ function Bonuses() {
 
 /* ---------------- FOR WHO ---------------- */
 
-/* ---------------- TESTIMONIALS ---------------- */
+/* ---------------- TESTIMONIALS (WhatsApp prints, carousel leve) ---------------- */
 function Testimonials() {
   return (
-    <section data-funnel-step="testimonials" className="relative py-20 md:py-28 bg-parchment-gradient">
+    <section data-funnel-step="testimonials" className="relative py-16 md:py-24 bg-parchment-gradient">
       <div className="max-w-6xl mx-auto px-4 text-center">
-        <SectionLabel>Depoimentos</SectionLabel>
-        <h2 className="mt-6 text-stroke-wood font-display text-3xl md:text-5xl">Famílias que já vivem a <span className="hl-gold">aventura</span></h2>
+        <SectionLabel>Depoimentos reais</SectionLabel>
+        <h2 className="mt-6 text-stroke-wood font-display text-3xl md:text-5xl">
+          Mensagens de quem já <span className="hl-gold">recebeu</span>
+        </h2>
+        <p className="mt-3 font-heading text-ink/70 max-w-xl mx-auto">
+          Prints de conversas reais no WhatsApp depois da entrega do material.
+        </p>
 
-        <div className="mt-12 grid sm:grid-cols-2 gap-6">
-          {testimonials.map((t, i) => (
-            <div key={t.name} className="bg-white rounded-3xl p-6 border-4 border-gold shadow-card text-left"
-              style={{ transform: `rotate(${(i % 2 === 0 ? -1 : 1) * 1.2}deg)` }}>
-              <div className="flex gap-1 mb-3">
-                {Array.from({ length: 5 }).map((_, k) => (
-                  <Star key={k} className="w-5 h-5 text-gold fill-gold" />
-                ))}
-              </div>
-              <p className="font-heading text-ink/85 italic">"{t.text}"</p>
-              <div className="mt-5 flex items-center gap-3">
-                <img
-                  src={t.photo}
-                  alt={`Foto de ${t.name}`}
-                  loading="lazy"
-                  className="w-14 h-14 rounded-full object-cover border-2 border-wood-dark shadow-card"
-                />
-                <div>
-                  <div className="font-display text-ink">{t.name}</div>
-                  <div className="text-sm font-heading text-ink/60">{t.role}</div>
-                </div>
-              </div>
-            </div>
+        <div className="mt-10 -mx-4 px-4 overflow-x-auto snap-x snap-mandatory flex gap-5 scrollbar-hide pb-6">
+          {testimonials.map((t) => (
+            <figure
+              key={t.name}
+              className="snap-center shrink-0 w-[78%] sm:w-[46%] md:w-[30%] bg-white rounded-3xl p-3 border-4 border-gold shadow-card"
+            >
+              <img
+                src={t.image}
+                alt={`Depoimento de ${t.name} no WhatsApp`}
+                loading="lazy"
+                decoding="async"
+                width={940}
+                height={1668}
+                className="w-full h-auto rounded-2xl object-cover"
+              />
+              <figcaption className="mt-3 mb-1 font-display text-ink">{t.name}</figcaption>
+            </figure>
           ))}
         </div>
+        <p className="mt-2 text-xs font-heading text-ink/50">← arraste para ver mais →</p>
       </div>
     </section>
   );

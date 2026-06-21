@@ -176,3 +176,7 @@ section[data-funnel-step="offer"] {
   content-visibility: auto;
   contain-intrinsic-size: 1px 1200px;
 }
+
+/* Hide scrollbar for testimonial carousel */
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
