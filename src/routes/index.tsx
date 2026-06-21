@@ -46,9 +46,9 @@ export const Route = createFileRoute("/")({
         rel: "preload",
         as: "image",
         href: heroImg480,
-        imagesrcset: heroSrcSet,
-        imagesizes: heroSizes,
-        fetchpriority: "high",
+        imageSrcSet: heroSrcSet,
+        imageSizes: heroSizes,
+        fetchPriority: "high",
       } as unknown as { rel: string },
     ],
 
@@ -184,7 +184,7 @@ function SalesPage() {
   );
 }
 
-function CtaButton({ children, large = false, href = "#offer", external = false, plan }: { children: React.ReactNode; large?: boolean; href?: string; external?: boolean; plan?: { name: string; value: number } }) {
+function CtaButton({ children, large = false, href = "#offer", external = false, plan }: { children: ReactNode; large?: boolean; href?: string; external?: boolean; plan?: { name: string; value: number } }) {
   const isExternal = external || /^https?:\/\//.test(href);
   const onClick = () => {
     try {
@@ -218,7 +218,7 @@ function CtaButton({ children, large = false, href = "#offer", external = false,
   );
 }
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function SectionLabel({ children }: { children: ReactNode }) {
   return (
     <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-wood text-parchment font-heading font-bold uppercase tracking-widest text-xs md:text-sm shadow-card">
       <Compass className="w-4 h-4" />
