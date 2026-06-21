@@ -1,15 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState, useEffect, lazy, Suspense, type ReactNode } from "react";
 import heroAsset from "@/assets/hero-mockup.webp.asset.json";
 import hero480Asset from "@/assets/hero-mockup-480.webp.asset.json";
 import hero768Asset from "@/assets/hero-mockup-768.webp.asset.json";
-const heroImg = heroAsset.url;
-const heroImg480 = hero480Asset.url;
-const heroImg768 = hero768Asset.url;
-const heroSrcSet = `${heroImg480} 480w, ${heroImg768} 768w, ${heroImg} 900w`;
-const heroSizes = "(max-width: 640px) 92vw, (max-width: 1024px) 60vw, 640px";
 import productAsset from "@/assets/product-mockup.webp.asset.json";
-const productImg = productAsset.url;
-const Testimonials = lazy(() => import("@/components/Testimonials"));
 import bonusColorir from "@/assets/bonus-colorir.webp.asset.json";
 import bonusCacaPalavras from "@/assets/bonus-caca-palavras.webp.asset.json";
 import bonusDetetive from "@/assets/bonus-detetive.webp.asset.json";
@@ -20,10 +14,17 @@ import {
   ChevronDown, Printer, MapPin, Crown, Flame, Anchor, Sun,
   Palette, Search, Eye, Gift,
 } from "lucide-react";
-import { useState, useEffect, lazy, Suspense } from "react";
 import { FB_PIXEL_ID, FB_PIXEL_SNIPPET, trackFbEvent, fbTrack } from "@/lib/fb-pixel";
 import { initTracker } from "@/lib/tracker";
 import { UrgencyBar } from "@/components/UrgencyBar";
+
+const heroImg = heroAsset.url;
+const heroImg480 = hero480Asset.url;
+const heroImg768 = hero768Asset.url;
+const heroSrcSet = `${heroImg480} 480w, ${heroImg768} 768w, ${heroImg} 900w`;
+const heroSizes = "(max-width: 640px) 92vw, (max-width: 1024px) 60vw, 640px";
+const productImg = productAsset.url;
+const Testimonials = lazy(() => import("@/components/Testimonials"));
 
 const SalesNotifications = lazy(() =>
   import("@/components/SalesNotifications").then((m) => ({ default: m.SalesNotifications })),
