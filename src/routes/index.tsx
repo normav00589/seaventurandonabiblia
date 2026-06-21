@@ -339,14 +339,16 @@ function Marquee() {
 /* ---------------- INCLUDED ---------------- */
 function WhatsIncluded() {
   const items = [
-    { title: "Missão Inicial", icon: Compass },
+    { title: "Álbum Bíblico Colecionável", icon: BookOpen },
+    { title: "101 Personagens Bíblicos", icon: Crown },
+    { title: "Figurinhas Bíblicas", icon: Star },
+    { title: "Medalhas e Recompensas", icon: Trophy },
     { title: "Passaporte do Explorador", icon: MapPin },
-    { title: "Coleção de Personagens", icon: Crown },
-    { title: "Histórias Bíblicas", icon: BookOpen },
-    { title: "Atividades", icon: Sparkles },
-    { title: "Desafios", icon: Target },
-    { title: "Sistema de Medalhas", icon: Trophy },
-    { title: "Certificado Final", icon: Award },
+    { title: "Livro de Colorir Bíblico", icon: Palette },
+    { title: "Caça-Palavras Bíblicos", icon: Search },
+    { title: "Detetive Bíblico", icon: Eye },
+    { title: "Diário de Oração Infantil", icon: HandHeart },
+    { title: "Certificado de Conclusão", icon: Award },
   ];
   return (
     <section data-funnel-step="kit" className="relative py-16 md:py-24 bg-wood text-parchment overflow-hidden">
@@ -376,7 +378,7 @@ function WhatsIncluded() {
               />
             </div>
             <div className="absolute -top-3 -right-3 bg-gold text-wood-dark font-display text-xs md:text-sm px-3 py-1.5 rounded-full border-2 border-wood-dark shadow-card rotate-6">
-              8 itens
+              10 itens
             </div>
           </div>
 
