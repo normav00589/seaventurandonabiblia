@@ -588,43 +588,7 @@ function Bonuses() {
 
 /* ---------------- FOR WHO ---------------- */
 
-/* ---------------- TESTIMONIALS (WhatsApp prints, carousel leve) ---------------- */
-function Testimonials() {
-  return (
-    <section data-funnel-step="testimonials" className="relative py-16 md:py-24 bg-parchment-gradient">
-      <div className="max-w-6xl mx-auto px-4 text-center">
-        <SectionLabel>Depoimentos reais</SectionLabel>
-        <h2 className="mt-6 text-stroke-wood font-display text-3xl md:text-5xl">
-          Mensagens de quem já <span className="hl-gold">recebeu</span>
-        </h2>
-        <p className="mt-3 font-heading text-ink/70 max-w-xl mx-auto">
-          Prints de conversas reais no WhatsApp depois da entrega do material.
-        </p>
-
-        <div className="mt-10 -mx-4 px-4 overflow-x-auto snap-x snap-mandatory flex gap-5 scrollbar-hide pb-6">
-          {testimonials.map((t) => (
-            <figure
-              key={t.name}
-              className="snap-center shrink-0 w-[78%] sm:w-[46%] md:w-[30%] bg-white rounded-3xl p-3 border-4 border-gold shadow-card"
-            >
-              <img
-                src={t.image}
-                alt={`Depoimento de ${t.name} no WhatsApp`}
-                loading="lazy"
-                decoding="async"
-                width={940}
-                height={1668}
-                className="w-full h-auto rounded-2xl object-cover"
-              />
-              <figcaption className="mt-3 mb-1 font-display text-ink">{t.name}</figcaption>
-            </figure>
-          ))}
-        </div>
-        <p className="mt-2 text-xs font-heading text-ink/50">← arraste para ver mais →</p>
-      </div>
-    </section>
-  );
-}
+/* Testimonials moved to src/components/Testimonials.tsx (lazy-loaded) */
 
 /* ---------------- GUARANTEE ---------------- */
 function Guarantee() {
