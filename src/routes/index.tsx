@@ -254,7 +254,7 @@ function Hero() {
           <span className="block">longe do <span className="hl-underline">excesso de telas</span></span>
         </h1>
         <p className="mt-5 text-white/95 font-heading text-base md:text-lg max-w-2xl mx-auto drop-shadow">
-          Mais de <strong>100 personagens</strong>, figurinhas, pinturas e desafios para ensinar valores cristãos de forma divertida.
+          Você terá mais de <strong>100 personagens</strong>, figurinhas, pinturas e desafios para ensinar valores cristãos de forma divertida.
         </p>
 
         <div className="relative mt-6 mx-auto max-w-xs sm:max-w-sm md:max-w-md">
