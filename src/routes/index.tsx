@@ -121,30 +121,10 @@ const faqs = [
 ];
 
 const testimonials = [
-  {
-    name: "Rosângela, 52",
-    role: "Avó do João, 7 anos",
-    photo: depoimentoRosangela.url,
-    text: "Confesso que comprei meio desconfiada, achei que ele não ia ter paciência. No primeiro dia, meu neto sentou comigo, fez a missão da Arca e ainda pediu pra ligar pro pai contando o que aprendeu. Chorei, viu?",
-  },
-  {
-    name: "Roberto, 48",
-    role: "Pai da Lívia e do Theo",
-    photo: depoimentoRoberto.url,
-    text: "Eu trabalho fora o dia todo e queria um momento de qualidade com meus filhos à noite. A Caça ao Tesouro virou nosso ritual depois do jantar. Hoje eles me lembram: 'Pai, e a missão de hoje?'",
-  },
-  {
-    name: "Dona Marlene, 61",
-    role: "Professora de EBD há 22 anos",
-    photo: depoimentoMarlene.url,
-    text: "Já testei muito material na igreja, mas esse foi o primeiro que prendeu as crianças do começo ao fim. As figurinhas e medalhas geraram um engajamento que eu nunca tinha visto. Recomendo de olhos fechados.",
-  },
-  {
-    name: "Thiago, 34",
-    role: "Pai de primeira viagem",
-    photo: depoimentoThiago.url,
-    text: "Não tenho muito conhecimento bíblico e tinha medo de ensinar errado. O material guia tudo passinho a passinho. Meu filho de 6 anos hoje sabe quem é Davi, Noé, Moisés... e o melhor: entende o porquê de cada história.",
-  },
+  { name: "Ana Paula", image: wppAnaPaula.url },
+  { name: "Tia Simone", image: wppTiaSimone.url },
+  { name: "Dona Rosângela", image: wppDonaRosangela.url },
+  { name: "Juliana", image: wppJuliana.url },
 ];
 
 function SalesPage() {
