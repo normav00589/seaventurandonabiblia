@@ -588,39 +588,39 @@ function Bonuses() {
 
 /* ---------------- FOR WHO ---------------- */
 
-/* ---------------- TESTIMONIALS ---------------- */
+/* ---------------- TESTIMONIALS (WhatsApp prints, carousel leve) ---------------- */
 function Testimonials() {
   return (
-    <section data-funnel-step="testimonials" className="relative py-20 md:py-28 bg-parchment-gradient">
+    <section data-funnel-step="testimonials" className="relative py-16 md:py-24 bg-parchment-gradient">
       <div className="max-w-6xl mx-auto px-4 text-center">
-        <SectionLabel>Depoimentos</SectionLabel>
-        <h2 className="mt-6 text-stroke-wood font-display text-3xl md:text-5xl">Famílias que já vivem a <span className="hl-gold">aventura</span></h2>
+        <SectionLabel>Depoimentos reais</SectionLabel>
+        <h2 className="mt-6 text-stroke-wood font-display text-3xl md:text-5xl">
+          Mensagens de quem já <span className="hl-gold">recebeu</span>
+        </h2>
+        <p className="mt-3 font-heading text-ink/70 max-w-xl mx-auto">
+          Prints de conversas reais no WhatsApp depois da entrega do material.
+        </p>
 
-        <div className="mt-12 grid sm:grid-cols-2 gap-6">
-          {testimonials.map((t, i) => (
-            <div key={t.name} className="bg-white rounded-3xl p-6 border-4 border-gold shadow-card text-left"
-              style={{ transform: `rotate(${(i % 2 === 0 ? -1 : 1) * 1.2}deg)` }}>
-              <div className="flex gap-1 mb-3">
-                {Array.from({ length: 5 }).map((_, k) => (
-                  <Star key={k} className="w-5 h-5 text-gold fill-gold" />
-                ))}
-              </div>
-              <p className="font-heading text-ink/85 italic">"{t.text}"</p>
-              <div className="mt-5 flex items-center gap-3">
-                <img
-                  src={t.photo}
-                  alt={`Foto de ${t.name}`}
-                  loading="lazy"
-                  className="w-14 h-14 rounded-full object-cover border-2 border-wood-dark shadow-card"
-                />
-                <div>
-                  <div className="font-display text-ink">{t.name}</div>
-                  <div className="text-sm font-heading text-ink/60">{t.role}</div>
-                </div>
-              </div>
-            </div>
+        <div className="mt-10 -mx-4 px-4 overflow-x-auto snap-x snap-mandatory flex gap-5 scrollbar-hide pb-6">
+          {testimonials.map((t) => (
+            <figure
+              key={t.name}
+              className="snap-center shrink-0 w-[78%] sm:w-[46%] md:w-[30%] bg-white rounded-3xl p-3 border-4 border-gold shadow-card"
+            >
+              <img
+                src={t.image}
+                alt={`Depoimento de ${t.name} no WhatsApp`}
+                loading="lazy"
+                decoding="async"
+                width={940}
+                height={1668}
+                className="w-full h-auto rounded-2xl object-cover"
+              />
+              <figcaption className="mt-3 mb-1 font-display text-ink">{t.name}</figcaption>
+            </figure>
           ))}
         </div>
+        <p className="mt-2 text-xs font-heading text-ink/50">← arraste para ver mais →</p>
       </div>
     </section>
   );
