@@ -1,0 +1,11 @@
+name = "seaventurandonabiblia"
+main = ".output/server/index.mjs"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+[site]
+bucket = ".output/public"
+
+[[routes]]
+pattern = "escoladeproposito.online/*"
+zone_name = "escoladeproposito.online"
