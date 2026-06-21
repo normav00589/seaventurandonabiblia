@@ -71,14 +71,6 @@ const characters = [
   { name: "Jonas", icon: "🐋", color: "from-wood to-wood-dark" },
 ];
 
-const steps = [
-  { n: 1, title: "Receba o material", desc: "Acesso imediato ao seu kit completo no e-mail.", icon: Download },
-  { n: 2, title: "Imprima as páginas", desc: "Material pronto para imprimir em casa ou na gráfica.", icon: Printer },
-  { n: 3, title: "Complete as missões", desc: "Desafios bíblicos divertidos a cada etapa.", icon: Target },
-  { n: 4, title: "Colecione os personagens", desc: "Mais de 100 heróis da fé para descobrir.", icon: Star },
-  { n: 5, title: "Ganhe medalhas", desc: "Recompensas que celebram cada conquista.", icon: Trophy },
-  { n: 6, title: "Conclua a jornada", desc: "Desbloqueie o Certificado Final de Explorador.", icon: Award },
-];
 
 const benefits = [
   { icon: BookOpen, title: "Conhecimento Bíblico", color: "bg-sky" },
@@ -167,9 +159,6 @@ function SalesPage() {
       <Suspense fallback={null}><SalesNotifications /></Suspense>
       <Hero />
       <Marquee />
-      
-      
-      <HowItWorks />
       <WhatsIncluded />
       <Characters />
       <Benefits />
@@ -346,42 +335,6 @@ function Marquee() {
 
 /* ---------------- SOLUTION ---------------- */
 
-/* ---------------- HOW IT WORKS ---------------- */
-function HowItWorks() {
-  return (
-    <section className="relative py-20 md:py-28 bg-parchment-gradient">
-      <div className="max-w-6xl mx-auto px-4 text-center">
-        <SectionLabel>Como Funciona</SectionLabel>
-        <h2 className="mt-6 text-stroke-wood font-display text-3xl md:text-5xl">A Trilha da <span className="hl-gold">Aventura</span></h2>
-        <p className="mt-4 font-heading text-lg text-ink/80 max-w-2xl mx-auto">
-          Siga o mapa, complete cada etapa e desbloqueie <span className="hl-underline">tesouros bíblicos</span>.
-        </p>
-
-        <div className="relative mt-16">
-          {/* Trail */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-2 dashed-trail" />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 relative">
-            {steps.map((s, i) => {
-              const Icon = s.icon;
-              return (
-                <div key={s.n} className={`relative flex flex-col items-center ${i % 2 === 0 ? "lg:translate-y-0" : "lg:translate-y-8"}`}>
-                  <div className="relative w-24 h-24 rounded-full bg-gold-gradient border-4 border-wood-dark shadow-treasure flex items-center justify-center">
-                    <Icon className="w-10 h-10 text-wood-dark" />
-                    <div className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-wood-dark text-gold font-display text-lg flex items-center justify-center border-4 border-parchment">
-                      {s.n}
-                    </div>
-                  </div>
-                  <h3 className="mt-4 font-display text-lg text-ink">{s.title}</h3>
-                  <p className="mt-1 text-sm font-heading text-ink/75">{s.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ---------------- INCLUDED ---------------- */
 function WhatsIncluded() {
