@@ -113,7 +113,8 @@ const faqs = [
 
 function SalesPage() {
   useEffect(() => {
-    // Defer non-critical scripts until after first paint to keep main thread free.
+    // Atrasa pixel + tracker por 2s após o load para não impactar FCP/LCP.
+    let timer: ReturnType<typeof setTimeout> | null = null;
     const run = () => {
       try {
         if (!document.getElementById("fb-pixel-snippet")) {
@@ -123,8 +124,7 @@ function SalesPage() {
           document.head.appendChild(s);
         }
       } catch {}
-      initTracker();
-      // Advanced tracking: ViewContent (página de oferta) com dedupe via CAPI
+      try { initTracker(); } catch {}
       setTimeout(() => {
         try {
           trackFbEvent("ViewContent", {
@@ -134,15 +134,17 @@ function SalesPage() {
             value: 13.9,
           });
         } catch {}
-      }, 500);
+      }, 300);
     };
-    if ("requestIdleCallback" in window) {
-      (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => void })
-        .requestIdleCallback(run, { timeout: 2000 });
+    const schedule = () => { timer = setTimeout(run, 2000); };
+    if (document.readyState === "complete") {
+      schedule();
     } else {
-      setTimeout(run, 1200);
+      window.addEventListener("load", schedule, { once: true });
     }
+    return () => { if (timer) clearTimeout(timer); };
   }, []);
+
   return (
     <div className="overflow-x-hidden pt-12 sm:pt-11">
       <UrgencyBar />
