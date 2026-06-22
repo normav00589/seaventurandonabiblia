@@ -7,6 +7,7 @@ import { z } from "zod";
 // bloqueadores de anúncios.
 
 const PIXEL_ID = "4377717859166211";
+const PIXEL_ID_2 = "886009030499415";
 const API_VERSION = "v20.0";
 
 const InputSchema = z.object({
@@ -30,46 +31,50 @@ async function sha256(input: string): Promise<string> {
     .join("");
 }
 
+async function buildPayload(data: z.infer<typeof InputSchema>) {
+  const req = getRequest();
+  const ua = req.headers.get("user-agent") ?? undefined;
+  const ip = getRequestIP({ xForwardedFor: true }) ?? undefined;
+  const fbp = data.fbp ?? req.headers.get("x-fbp") ?? undefined;
+  const fbc = data.fbc ?? req.headers.get("x-fbc") ?? undefined;
+
+  const userData: Record<string, unknown> = {};
+  if (data.email) userData.em = [await sha256(data.email)];
+  if (data.phone) userData.ph = [await sha256(data.phone.replace(/\D/g, ""))];
+  if (ip) userData.client_ip_address = ip;
+  if (ua) userData.client_user_agent = ua;
+  if (fbp) userData.fbp = fbp;
+  if (fbc) userData.fbc = fbc;
+
+  const customData: Record<string, unknown> = {};
+  if (data.value != null) {
+    customData.value = data.value;
+    customData.currency = data.currency ?? "BRL";
+  }
+  if (data.contentName) customData.content_name = data.contentName;
+
+  return {
+    data: [
+      {
+        event_name: data.eventName,
+        event_time: Math.floor(Date.now() / 1000),
+        event_id: data.eventId,
+        action_source: "website",
+        event_source_url: data.eventSourceUrl,
+        user_data: userData,
+        custom_data: Object.keys(customData).length > 0 ? customData : undefined,
+      },
+    ],
+  };
+}
+
 export const sendFbEvent = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => InputSchema.parse(data))
   .handler(async ({ data }) => {
     const token = "EAAX1GoOmhIgBRlzPklJlObHtwioJsOAwqLUrbzgXfp2HMrNS8g6JAwA90ztGMiKWPezKlSmgL7gVOwjUml5xUHBB56a77EJcc1XXsHlDMyJNwItM5PO3Aec9nNU0SgjqUd86er7yYXyj5fYVkZCSa2ZBQpZBUtr9IfrnZCUY9kmxhvsf7VCnzTcmWyEGhQZDZD";
     if (!token) return { ok: false, error: "missing_token" as const };
 
-    const req = getRequest();
-    const ua = req.headers.get("user-agent") ?? undefined;
-    const ip = getRequestIP({ xForwardedFor: true }) ?? undefined;
-    const fbp = data.fbp ?? req.headers.get("x-fbp") ?? undefined;
-    const fbc = data.fbc ?? req.headers.get("x-fbc") ?? undefined;
-
-    const userData: Record<string, unknown> = {};
-    if (data.email) userData.em = [await sha256(data.email)];
-    if (data.phone) userData.ph = [await sha256(data.phone.replace(/\D/g, ""))];
-    if (ip) userData.client_ip_address = ip;
-    if (ua) userData.client_user_agent = ua;
-    if (fbp) userData.fbp = fbp;
-    if (fbc) userData.fbc = fbc;
-
-    const customData: Record<string, unknown> = {};
-    if (data.value != null) {
-      customData.value = data.value;
-      customData.currency = data.currency ?? "BRL";
-    }
-    if (data.contentName) customData.content_name = data.contentName;
-
-    const body = {
-      data: [
-        {
-          event_name: data.eventName,
-          event_time: Math.floor(Date.now() / 1000),
-          event_id: data.eventId,
-          action_source: "website",
-          event_source_url: data.eventSourceUrl,
-          user_data: userData,
-          custom_data: Object.keys(customData).length > 0 ? customData : undefined,
-        },
-      ],
-    };
+    const body = await buildPayload(data);
 
     const res = await fetch(
       `https://graph.facebook.com/${API_VERSION}/${PIXEL_ID}/events?access_token=${encodeURIComponent(token)}`,
@@ -83,6 +88,31 @@ export const sendFbEvent = createServerFn({ method: "POST" })
     if (!res.ok) {
       const text = await res.text();
       console.error("FB CAPI error", res.status, text);
+      return { ok: false, error: "upstream_error" as const, status: res.status };
+    }
+    return { ok: true as const };
+  });
+
+export const sendFbEvent2 = createServerFn({ method: "POST" })
+  .inputValidator((data: unknown) => InputSchema.parse(data))
+  .handler(async ({ data }) => {
+    const token = "EAAF2bPGQvO8BRxWuCZAGhFHzJ8JtrgYrhIcIKKWEoBqAAjvbaILhrNZAwZCAfBFNpD770PINxQQ7uMVo0ublRkdzNUGJDejV80yK2AATYm60d01Qo6dnnv0E7r3LrRuCYpCtGFL0FLfv60NGEZAHUYDLZB5OskLHSgF4svZCfaAZCffNx7MU0aqbsSq9y9bywZDZD";
+    if (!token) return { ok: false, error: "missing_token" as const };
+
+    const body = await buildPayload(data);
+
+    const res = await fetch(
+      `https://graph.facebook.com/${API_VERSION}/${PIXEL_ID_2}/events?access_token=${encodeURIComponent(token)}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      },
+    );
+
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("FB CAPI2 error", res.status, text);
       return { ok: false, error: "upstream_error" as const, status: res.status };
     }
     return { ok: true as const };
