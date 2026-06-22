@@ -41,7 +41,6 @@ export const Route = createFileRoute("/")({
       { property: "og:image", content: heroImg },
     ],
     links: [
-      { rel: "preconnect", href: "https://connect.facebook.net", crossOrigin: "anonymous" },
       {
         rel: "preload",
         as: "image",
@@ -51,6 +50,7 @@ export const Route = createFileRoute("/")({
         fetchPriority: "high",
       } as unknown as { rel: string },
     ],
+
 
   }),
   component: SalesPage,
