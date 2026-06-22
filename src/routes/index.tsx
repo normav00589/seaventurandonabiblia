@@ -14,7 +14,7 @@ import {
   ChevronDown, Printer, MapPin, Crown, Flame, Anchor, Sun,
   Palette, Search, Eye, Gift,
 } from "lucide-react";
-import { FB_PIXEL_ID, FB_PIXEL_SNIPPET, trackFbEvent, fbTrack } from "@/lib/fb-pixel";
+import { FB_PIXEL_ID, FB_PIXEL_ID_2, FB_PIXEL_SNIPPET, trackFbEvent, fbTrack } from "@/lib/fb-pixel";
 import { initTracker } from "@/lib/tracker";
 import { UrgencyBar } from "@/components/UrgencyBar";
 
