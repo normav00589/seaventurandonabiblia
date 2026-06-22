@@ -173,8 +173,8 @@ function SalesPage() {
       <Benefits />
       <Bonuses />
       
-      <Suspense fallback={<div style={{ minHeight: 600 }} />}><Testimonials /></Suspense>
       <Offer />
+      <Suspense fallback={<div style={{ minHeight: 600 }} />}><Testimonials /></Suspense>
       <Guarantee />
       <FAQ />
       <Footer />
