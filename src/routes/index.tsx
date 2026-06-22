@@ -288,7 +288,7 @@ function Hero() {
             <Flame className="w-3.5 h-3.5" /> Promoção de Hoje
             <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
           </div>
-          <div className="bg-white/95 backdrop-blur border-4 border-gold rounded-3xl px-6 py-4 shadow-treasure">
+          <div className="bg-white md:bg-white/95 md:backdrop-blur border-4 border-gold rounded-3xl px-6 py-4 shadow-treasure">
             <div className="flex items-baseline justify-center gap-2 flex-wrap">
               <span className="text-wood font-heading text-base sm:text-lg line-through decoration-2 decoration-destructive">De R$ 47,00</span>
               <span className="text-wood-dark font-heading text-sm sm:text-base">por apenas</span>
