@@ -231,16 +231,17 @@ function Hero() {
     <header className="relative bg-hero-gradient overflow-hidden pt-6 pb-20 md:pb-28">
       {/* Subtle warm overlay for text readability */}
       <div className="absolute inset-0 bg-wood-dark/20 pointer-events-none" />
-      {/* Warm glow accents */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Warm glow accents — apenas em telas md+ para não custar paint no mobile */}
+      <div className="absolute inset-0 pointer-events-none hidden md:block">
         <div className="absolute -top-20 -left-20 w-96 h-96 bg-gold/25 rounded-full blur-3xl" />
         <div className="absolute top-40 -right-20 w-96 h-96 bg-adventure/20 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-gold/15 rounded-full blur-3xl" />
       </div>
-      {/* Stars */}
-      <Star className="absolute top-12 right-1/4 w-6 h-6 text-gold fill-gold animate-sparkle" />
-      <Star className="absolute top-40 left-1/3 w-4 h-4 text-gold fill-gold animate-sparkle" style={{ animationDelay: "1.2s" }} />
-      <Star className="absolute bottom-40 right-10 w-8 h-8 text-gold fill-gold animate-sparkle" style={{ animationDelay: "0.6s" }} />
+      {/* Stars — apenas md+ */}
+      <Star className="hidden md:block absolute top-12 right-1/4 w-6 h-6 text-gold fill-gold animate-sparkle" />
+      <Star className="hidden md:block absolute top-40 left-1/3 w-4 h-4 text-gold fill-gold animate-sparkle" style={{ animationDelay: "1.2s" }} />
+      <Star className="hidden md:block absolute bottom-40 right-10 w-8 h-8 text-gold fill-gold animate-sparkle" style={{ animationDelay: "0.6s" }} />
+
 
       <nav className="relative max-w-7xl mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center gap-2 text-white font-display text-lg md:text-xl">
