@@ -41,7 +41,6 @@ export const Route = createFileRoute("/")({
       { property: "og:image", content: heroImg },
     ],
     links: [
-      { rel: "preconnect", href: "https://connect.facebook.net", crossOrigin: "anonymous" },
       {
         rel: "preload",
         as: "image",
@@ -51,6 +50,7 @@ export const Route = createFileRoute("/")({
         fetchPriority: "high",
       } as unknown as { rel: string },
     ],
+
 
   }),
   component: SalesPage,
@@ -113,7 +113,8 @@ const faqs = [
 
 function SalesPage() {
   useEffect(() => {
-    // Defer non-critical scripts until after first paint to keep main thread free.
+    // Atrasa pixel + tracker por 2s após o load para não impactar FCP/LCP.
+    let timer: ReturnType<typeof setTimeout> | null = null;
     const run = () => {
       try {
         if (!document.getElementById("fb-pixel-snippet")) {
@@ -123,8 +124,7 @@ function SalesPage() {
           document.head.appendChild(s);
         }
       } catch {}
-      initTracker();
-      // Advanced tracking: ViewContent (página de oferta) com dedupe via CAPI
+      try { initTracker(); } catch {}
       setTimeout(() => {
         try {
           trackFbEvent("ViewContent", {
@@ -134,15 +134,17 @@ function SalesPage() {
             value: 13.9,
           });
         } catch {}
-      }, 500);
+      }, 300);
     };
-    if ("requestIdleCallback" in window) {
-      (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => void })
-        .requestIdleCallback(run, { timeout: 2000 });
+    const schedule = () => { timer = setTimeout(run, 2000); };
+    if (document.readyState === "complete") {
+      schedule();
     } else {
-      setTimeout(run, 1200);
+      window.addEventListener("load", schedule, { once: true });
     }
+    return () => { if (timer) clearTimeout(timer); };
   }, []);
+
   return (
     <div className="overflow-x-hidden pt-12 sm:pt-11">
       <UrgencyBar />
@@ -229,16 +231,17 @@ function Hero() {
     <header className="relative bg-hero-gradient overflow-hidden pt-6 pb-20 md:pb-28">
       {/* Subtle warm overlay for text readability */}
       <div className="absolute inset-0 bg-wood-dark/20 pointer-events-none" />
-      {/* Warm glow accents */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Warm glow accents — apenas em telas md+ para não custar paint no mobile */}
+      <div className="absolute inset-0 pointer-events-none hidden md:block">
         <div className="absolute -top-20 -left-20 w-96 h-96 bg-gold/25 rounded-full blur-3xl" />
         <div className="absolute top-40 -right-20 w-96 h-96 bg-adventure/20 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-gold/15 rounded-full blur-3xl" />
       </div>
-      {/* Stars */}
-      <Star className="absolute top-12 right-1/4 w-6 h-6 text-gold fill-gold animate-sparkle" />
-      <Star className="absolute top-40 left-1/3 w-4 h-4 text-gold fill-gold animate-sparkle" style={{ animationDelay: "1.2s" }} />
-      <Star className="absolute bottom-40 right-10 w-8 h-8 text-gold fill-gold animate-sparkle" style={{ animationDelay: "0.6s" }} />
+      {/* Stars — apenas md+ */}
+      <Star className="hidden md:block absolute top-12 right-1/4 w-6 h-6 text-gold fill-gold animate-sparkle" />
+      <Star className="hidden md:block absolute top-40 left-1/3 w-4 h-4 text-gold fill-gold animate-sparkle" style={{ animationDelay: "1.2s" }} />
+      <Star className="hidden md:block absolute bottom-40 right-10 w-8 h-8 text-gold fill-gold animate-sparkle" style={{ animationDelay: "0.6s" }} />
+
 
       <nav className="relative max-w-7xl mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center gap-2 text-white font-display text-lg md:text-xl">
@@ -265,7 +268,8 @@ function Hero() {
         </p>
 
         <div className="relative mt-6 mx-auto max-w-xs sm:max-w-sm md:max-w-md">
-          <div className="absolute -inset-6 bg-gold/30 rounded-[3rem] blur-3xl" />
+          <div className="hidden md:block absolute -inset-6 bg-gold/30 rounded-[3rem] blur-3xl" />
+
           <div className="relative rounded-[2rem] overflow-hidden border-8 border-gold shadow-treasure rotate-1">
             <img src={heroImg480} srcSet={heroSrcSet} sizes={heroSizes} alt="Kit completo A Grande Caça ao Tesouro da Bíblia — 5 livros, figurinhas, certificado e medalhas" className="w-full h-auto" width={900} height={900} fetchPriority="high" decoding="async" />
           </div>
@@ -284,7 +288,7 @@ function Hero() {
             <Flame className="w-3.5 h-3.5" /> Promoção de Hoje
             <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
           </div>
-          <div className="bg-white/95 backdrop-blur border-4 border-gold rounded-3xl px-6 py-4 shadow-treasure">
+          <div className="bg-white md:bg-white/95 md:backdrop-blur border-4 border-gold rounded-3xl px-6 py-4 shadow-treasure">
             <div className="flex items-baseline justify-center gap-2 flex-wrap">
               <span className="text-wood font-heading text-base sm:text-lg line-through decoration-2 decoration-destructive">De R$ 47,00</span>
               <span className="text-wood-dark font-heading text-sm sm:text-base">por apenas</span>
