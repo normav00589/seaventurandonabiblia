@@ -169,12 +169,11 @@
 }
 
 /* Defer rendering of below-the-fold sections to reduce initial layout/paint cost.
-   contain-intrinsic-size keeps scrollbar/anchors stable while content is skipped. */
-section[data-funnel-step="bonus"],
-section[data-funnel-step="testimonials"],
-section[data-funnel-step="offer"] {
+   contain-intrinsic-size keeps scrollbar/anchors stable while content is skipped.
+   Applies to every <section> on the page (hero is a <header>, so it is unaffected). */
+section {
   content-visibility: auto;
-  contain-intrinsic-size: 1px 1200px;
+  contain-intrinsic-size: 1px 900px;
 }
 
 /* Hide scrollbar for testimonial carousel */
