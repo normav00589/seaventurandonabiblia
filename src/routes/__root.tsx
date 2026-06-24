@@ -95,15 +95,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      // Preconnect e fontes — carregamento não-bloqueante (não atrasa FCP/LCP)
+      // Preconnect + fonte com display=swap (texto aparece imediatamente com fallback)
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Nunito:wght@400;700&display=swap",
-        media: "print",
-        onLoad: "this.media='all'",
-      } as unknown as { rel: string },
+      },
     ],
   }),
   shellComponent: RootShell,

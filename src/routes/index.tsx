@@ -45,9 +45,9 @@ export const Route = createFileRoute("/")({
         rel: "preload",
         as: "image",
         href: heroImg480,
-        imageSrcSet: heroSrcSet,
-        imageSizes: heroSizes,
-        fetchPriority: "high",
+        imagesrcset: heroSrcSet,
+        imagesizes: heroSizes,
+        fetchpriority: "high",
       } as unknown as { rel: string },
     ],
 
@@ -112,6 +112,8 @@ const faqs = [
 
 
 function SalesPage() {
+  const [showNotifications, setShowNotifications] = useState(false);
+
   useEffect(() => {
     // Atrasa pixel + tracker por 2s após o load para não impactar FCP/LCP.
     let timer: ReturnType<typeof setTimeout> | null = null;
@@ -142,7 +144,20 @@ function SalesPage() {
     } else {
       window.addEventListener("load", schedule, { once: true });
     }
-    return () => { if (timer) clearTimeout(timer); };
+
+    // Monta SalesNotifications só depois do idle (não compete com LCP)
+    const ric = (window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback;
+    let idleTimer: ReturnType<typeof setTimeout> | null = null;
+    if (ric) {
+      ric(() => setShowNotifications(true), { timeout: 4000 });
+    } else {
+      idleTimer = setTimeout(() => setShowNotifications(true), 3000);
+    }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+      if (idleTimer) clearTimeout(idleTimer);
+    };
   }, []);
 
   return (
@@ -165,7 +180,7 @@ function SalesPage() {
           src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID_2}&ev=PageView&noscript=1`}
         />
       </noscript>
-      <Suspense fallback={null}><SalesNotifications /></Suspense>
+      {showNotifications && <Suspense fallback={null}><SalesNotifications /></Suspense>}
       <Hero />
       <Marquee />
       <WhatsIncluded />
