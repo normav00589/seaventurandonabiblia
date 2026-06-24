@@ -180,7 +180,7 @@ function SalesPage() {
           src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID_2}&ev=PageView&noscript=1`}
         />
       </noscript>
-      <Suspense fallback={null}><SalesNotifications /></Suspense>
+      {showNotifications && <Suspense fallback={null}><SalesNotifications /></Suspense>}
       <Hero />
       <Marquee />
       <WhatsIncluded />
