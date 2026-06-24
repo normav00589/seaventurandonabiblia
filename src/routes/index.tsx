@@ -294,7 +294,7 @@ function Hero() {
               <span className="text-wood-dark font-heading text-sm sm:text-base">por apenas</span>
             </div>
             <div className="text-adventure-dark font-display text-4xl sm:text-5xl font-extrabold leading-none mt-1">
-              R$ 5,90
+              R$ 3,90
             </div>
           </div>
         </div>
@@ -597,7 +597,7 @@ function Offer() {
             </div>
             <div className="mt-4 text-center">
               <div className="font-heading text-ink/60 line-through text-base">De R$ 27,00</div>
-              <div className="mt-1 font-display text-5xl md:text-6xl text-wood-dark">R$ 5,90</div>
+              <div className="mt-1 font-display text-5xl md:text-6xl text-wood-dark">R$ 3,90</div>
               <div className="mt-1 font-heading text-sm text-ink/70">pagamento único</div>
             </div>
 
@@ -639,7 +639,7 @@ function Offer() {
                       content_name: "Plano Básico",
                       content_type: "product",
                       currency: "BRL",
-                      value: 5.9,
+                      value: 3.9,
                     });
                   } catch {}
                 }}
