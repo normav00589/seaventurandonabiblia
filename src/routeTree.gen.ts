@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PainelFunilRouteImport } from './routes/painel-funil'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicVitalsRouteImport } from './routes/api/public/vitals'
 import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
 
 const PainelFunilRoute = PainelFunilRouteImport.update({
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicVitalsRoute = ApiPublicVitalsRouteImport.update({
+  id: '/api/public/vitals',
+  path: '/api/public/vitals',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
   id: '/api/public/track',
   path: '/api/public/track',
@@ -33,30 +39,39 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/painel-funil': typeof PainelFunilRoute
   '/api/public/track': typeof ApiPublicTrackRoute
+  '/api/public/vitals': typeof ApiPublicVitalsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/painel-funil': typeof PainelFunilRoute
   '/api/public/track': typeof ApiPublicTrackRoute
+  '/api/public/vitals': typeof ApiPublicVitalsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/painel-funil': typeof PainelFunilRoute
   '/api/public/track': typeof ApiPublicTrackRoute
+  '/api/public/vitals': typeof ApiPublicVitalsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/painel-funil' | '/api/public/track'
+  fullPaths: '/' | '/painel-funil' | '/api/public/track' | '/api/public/vitals'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/painel-funil' | '/api/public/track'
-  id: '__root__' | '/' | '/painel-funil' | '/api/public/track'
+  to: '/' | '/painel-funil' | '/api/public/track' | '/api/public/vitals'
+  id:
+    | '__root__'
+    | '/'
+    | '/painel-funil'
+    | '/api/public/track'
+    | '/api/public/vitals'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PainelFunilRoute: typeof PainelFunilRoute
   ApiPublicTrackRoute: typeof ApiPublicTrackRoute
+  ApiPublicVitalsRoute: typeof ApiPublicVitalsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -75,6 +90,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/vitals': {
+      id: '/api/public/vitals'
+      path: '/api/public/vitals'
+      fullPath: '/api/public/vitals'
+      preLoaderRoute: typeof ApiPublicVitalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/track': {
       id: '/api/public/track'
       path: '/api/public/track'
@@ -89,6 +111,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PainelFunilRoute: PainelFunilRoute,
   ApiPublicTrackRoute: ApiPublicTrackRoute,
+  ApiPublicVitalsRoute: ApiPublicVitalsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
