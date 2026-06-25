@@ -1,7 +1,15 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-/* Fontes do Google carregadas via <link> no __root.tsx para não bloquear o FCP */
+/* Fontes do Google carregadas via <link media="print"> no __root.tsx — não bloqueia o FCP */
+
+/* Pinta o fundo do hero IMEDIATAMENTE (antes do CSS/JS chegarem) para evitar tela branca
+   no 4G fraco — reduz drasticamente o abandono entre clique no anúncio e primeira pintura. */
+html, body {
+  background-color: #4a1f10;
+  color: #fef3e6;
+}
+
 
 @custom-variant dark (&:is(.dark *));
 
