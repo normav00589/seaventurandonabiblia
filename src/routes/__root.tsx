@@ -111,6 +111,22 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="pt-BR">
       <head>
         <HeadContent />
+        {/* Fonte do Google carregada de forma NÃO-BLOQUEANTE.
+            media="print" faz o navegador baixar sem aguardar antes de pintar.
+            O script inline troca para media="all" assim que o CSS chega. */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Nunito:wght@400;700&display=swap"
+          media="print"
+          // eslint-disable-next-line react/no-unknown-property
+          {...({ onLoad: "this.media='all'" } as Record<string, string>)}
+        />
+        <noscript>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Nunito:wght@400;700&display=swap"
+          />
+        </noscript>
       </head>
       <body>
         {children}
