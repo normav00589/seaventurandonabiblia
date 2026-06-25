@@ -23,7 +23,8 @@ export const Route = createFileRoute("/api/public/vitals")({
         if (!parsed.success) return new Response("Invalid payload", { status: 400 });
 
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-        await supabaseAdmin.from("web_vitals").insert({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await (supabaseAdmin.from("web_vitals" as any) as any).insert({
           session_key: parsed.data.session_key ?? null,
           metric: parsed.data.metric,
           value: parsed.data.value,

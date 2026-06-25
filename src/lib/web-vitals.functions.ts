@@ -25,8 +25,8 @@ export const getWebVitalsOverview = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const since = new Date(Date.now() - data.rangeDays * 24 * 60 * 60 * 1000).toISOString();
-    const { data: rows, error } = await supabaseAdmin
-      .from("web_vitals")
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data: rows, error } = await (supabaseAdmin.from("web_vitals" as any) as any)
       .select("metric,value,device,rating,created_at")
       .gte("created_at", since)
       .order("created_at", { ascending: false })
