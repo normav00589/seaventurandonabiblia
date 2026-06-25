@@ -3,9 +3,10 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { useState, Fragment } from "react";
 import { getFunnelOverview } from "@/lib/funnel.functions";
+import { getWebVitalsOverview } from "@/lib/web-vitals.functions";
 import {
   Users, MousePointerClick, TrendingUp, Clock, Smartphone, Monitor,
-  ChevronDown, ChevronRight, RefreshCw,
+  ChevronDown, ChevronRight, RefreshCw, Gauge,
 } from "lucide-react";
 
 export const Route = createFileRoute("/painel-funil")({
@@ -21,10 +22,16 @@ export const Route = createFileRoute("/painel-funil")({
 function PainelFunil() {
   const [rangeDays, setRangeDays] = useState(7);
   const fetchOverview = useServerFn(getFunnelOverview);
+  const fetchVitals = useServerFn(getWebVitalsOverview);
   const { data, isLoading, refetch, isFetching } = useQuery({
     queryKey: ["funnel-overview", rangeDays],
     queryFn: () => fetchOverview({ data: { rangeDays } }),
     refetchInterval: 30_000,
+  });
+  const { data: vitals } = useQuery({
+    queryKey: ["web-vitals", rangeDays],
+    queryFn: () => fetchVitals({ data: { rangeDays } }),
+    refetchInterval: 60_000,
   });
 
   return (
@@ -66,6 +73,7 @@ function PainelFunil() {
         ) : data ? (
           <>
             <StatsGrid totals={data.totals} />
+            {vitals && <WebVitalsCard vitals={vitals} />}
             <FunnelChart funnel={data.funnel} />
             <div className="grid lg:grid-cols-2 gap-6">
               <SourcesTable utm={data.utm} />
@@ -299,4 +307,76 @@ function formatRelative(iso: string) {
   if (diff < 3600) return `${Math.floor(diff / 60)}min`;
   if (diff < 86400) return `${Math.floor(diff / 3600)}h`;
   return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+}
+
+function WebVitalsCard({ vitals }: { vitals: {
+  totalSamples: number;
+  metrics: Array<{
+    metric: string; unit: string;
+    mobile: { p75: number; samples: number; goodPct: number; poorPct: number };
+    desktop: { p75: number; samples: number; goodPct: number; poorPct: number };
+  }>;
+} }) {
+  const fmt = (v: number, unit: string) => {
+    if (unit === "ms") return v < 1000 ? `${Math.round(v)}ms` : `${(v / 1000).toFixed(2)}s`;
+    return v.toFixed(3);
+  };
+  const color = (good: number, poor: number) => {
+    if (poor > 25) return "text-rose-400";
+    if (good >= 75) return "text-emerald-400";
+    return "text-amber-400";
+  };
+  const labelMap: Record<string, string> = {
+    LCP: "LCP (carrega o principal)",
+    FCP: "FCP (primeiro pixel)",
+    INP: "INP (resposta ao clique)",
+    CLS: "CLS (estabilidade visual)",
+    TTFB: "TTFB (resposta servidor)",
+  };
+  return (
+    <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+      <div className="flex items-center justify-between mb-1">
+        <h2 className="text-lg font-semibold flex items-center gap-2"><Gauge className="w-5 h-5 text-emerald-400" /> Velocidade real dos visitantes</h2>
+        <span className="text-xs text-slate-500">{vitals.totalSamples} amostras</span>
+      </div>
+      <p className="text-xs text-slate-500 mb-4">Mede no celular/desktop de cada pessoa que visita. P75 = velocidade que 75% dos visitantes têm ou melhor (padrão Google).</p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead className="text-xs uppercase text-slate-500 border-b border-slate-800">
+            <tr>
+              <th className="text-left py-2">Métrica</th>
+              <th className="text-right py-2">📱 Mobile P75</th>
+              <th className="text-right py-2">📱 % bons</th>
+              <th className="text-right py-2">💻 Desktop P75</th>
+              <th className="text-right py-2">💻 % bons</th>
+            </tr>
+          </thead>
+          <tbody>
+            {vitals.metrics.map((m) => (
+              <tr key={m.metric} className="border-b border-slate-800/50">
+                <td className="py-2 text-slate-200">{labelMap[m.metric] ?? m.metric}</td>
+                <td className={`py-2 text-right tabular-nums font-semibold ${color(m.mobile.goodPct, m.mobile.poorPct)}`}>
+                  {m.mobile.samples ? fmt(m.mobile.p75, m.unit) : "—"}
+                </td>
+                <td className="py-2 text-right tabular-nums text-slate-400">
+                  {m.mobile.samples ? `${m.mobile.goodPct.toFixed(0)}%` : "—"}
+                  <span className="text-xs text-slate-600 ml-1">({m.mobile.samples})</span>
+                </td>
+                <td className={`py-2 text-right tabular-nums font-semibold ${color(m.desktop.goodPct, m.desktop.poorPct)}`}>
+                  {m.desktop.samples ? fmt(m.desktop.p75, m.unit) : "—"}
+                </td>
+                <td className="py-2 text-right tabular-nums text-slate-400">
+                  {m.desktop.samples ? `${m.desktop.goodPct.toFixed(0)}%` : "—"}
+                  <span className="text-xs text-slate-600 ml-1">({m.desktop.samples})</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="text-xs text-slate-500 mt-3">
+        <span className="text-emerald-400">Verde</span> = bom · <span className="text-amber-400">Amarelo</span> = melhorar · <span className="text-rose-400">Vermelho</span> = ruim (muita gente abandonando).
+      </p>
+    </div>
+  );
 }
