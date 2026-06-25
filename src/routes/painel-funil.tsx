@@ -3,9 +3,10 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { useState, Fragment } from "react";
 import { getFunnelOverview } from "@/lib/funnel.functions";
+import { getWebVitalsOverview } from "@/lib/web-vitals.functions";
 import {
   Users, MousePointerClick, TrendingUp, Clock, Smartphone, Monitor,
-  ChevronDown, ChevronRight, RefreshCw,
+  ChevronDown, ChevronRight, RefreshCw, Gauge,
 } from "lucide-react";
 
 export const Route = createFileRoute("/painel-funil")({
@@ -21,10 +22,16 @@ export const Route = createFileRoute("/painel-funil")({
 function PainelFunil() {
   const [rangeDays, setRangeDays] = useState(7);
   const fetchOverview = useServerFn(getFunnelOverview);
+  const fetchVitals = useServerFn(getWebVitalsOverview);
   const { data, isLoading, refetch, isFetching } = useQuery({
     queryKey: ["funnel-overview", rangeDays],
     queryFn: () => fetchOverview({ data: { rangeDays } }),
     refetchInterval: 30_000,
+  });
+  const { data: vitals } = useQuery({
+    queryKey: ["web-vitals", rangeDays],
+    queryFn: () => fetchVitals({ data: { rangeDays } }),
+    refetchInterval: 60_000,
   });
 
   return (
@@ -66,6 +73,7 @@ function PainelFunil() {
         ) : data ? (
           <>
             <StatsGrid totals={data.totals} />
+            {vitals && <WebVitalsCard vitals={vitals} />}
             <FunnelChart funnel={data.funnel} />
             <div className="grid lg:grid-cols-2 gap-6">
               <SourcesTable utm={data.utm} />
