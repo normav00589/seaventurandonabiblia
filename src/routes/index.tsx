@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { FB_PIXEL_ID, FB_PIXEL_ID_2, FB_PIXEL_SNIPPET, trackFbEvent, fbTrack } from "@/lib/fb-pixel";
 import { initTracker } from "@/lib/tracker";
+import { initWebVitals } from "@/lib/web-vitals-tracker";
 import { UrgencyBar } from "@/components/UrgencyBar";
 
 const heroImg = heroAsset.url;
@@ -127,6 +128,7 @@ function SalesPage() {
         }
       } catch {}
       try { initTracker(); } catch {}
+      try { void initWebVitals(); } catch {}
       setTimeout(() => {
         try {
           trackFbEvent("ViewContent", {
